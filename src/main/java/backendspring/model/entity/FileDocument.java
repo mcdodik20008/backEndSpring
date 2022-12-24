@@ -13,7 +13,7 @@ public class FileDocument
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    public Long id;
 
     @Column(name = "name")
     public String name;
