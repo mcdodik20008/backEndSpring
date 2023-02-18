@@ -5,8 +5,12 @@ import backendspring.domain.model.entity.QFileDocument;
 import backendspring.domain.model.mapper.FileDocumentMapper;
 import backendspring.domain.model.view.FileDocumentShort;
 import backendspring.domain.repository.FileDocumentRepository;
+import backendspring.infrasructure.filter.FilterParam;
 import com.google.common.collect.Lists;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +24,8 @@ public class MainController {
     private final FileDocumentRepository fileDocumentRepository;
 
     @GetMapping
-    public List<FileDocument> getFileDocuments() {
+    public List<FileDocument> getFileDocuments(@FilterParam(cls = FileDocument.class) BooleanExpression filter,
+                                               Pageable pageable) {
         var q = QFileDocument.fileDocument.id.eq(1L).or(QFileDocument.fileDocument.id.eq(2L));
         var xx = fileDocumentRepository.findAll(q);
         return Lists.newArrayList(xx);
