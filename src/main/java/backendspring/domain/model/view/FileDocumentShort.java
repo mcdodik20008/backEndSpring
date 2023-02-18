@@ -1,4 +1,4 @@
-package backendspring.model.view;
+package backendspring.domain.model.view;
 
 import lombok.Getter;
 import lombok.Setter;

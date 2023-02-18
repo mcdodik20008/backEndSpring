@@ -1,12 +1,15 @@
-package backendspring.controller;
+package backendspring.domain.controller;
 
-import backendspring.model.entity.FileDocument;
-import backendspring.model.mapper.FileDocumentMapper;
-import backendspring.model.view.FileDocumentShort;
-import backendspring.repository.FileDocumentRepository;
+import backendspring.domain.model.entity.FileDocument;
+import backendspring.domain.model.entity.QFileDocument;
+import backendspring.domain.model.mapper.FileDocumentMapper;
+import backendspring.domain.model.view.FileDocumentShort;
+import backendspring.domain.repository.FileDocumentRepository;
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -17,13 +20,14 @@ public class MainController {
     private final FileDocumentRepository fileDocumentRepository;
 
     @GetMapping
-    public Page<FileDocument> getFileDocuments() {
-        return null;
+    public List<FileDocument> getFileDocuments() {
+        var q = QFileDocument.fileDocument.id.eq(1L).or(QFileDocument.fileDocument.id.eq(2L));
+        var xx = fileDocumentRepository.findAll(q);
+        return Lists.newArrayList(xx);
     }
 
     @GetMapping("/{id}")
     public FileDocumentShort getFileDocument(@PathVariable Long id) throws Exception {
-
         return FileDocumentMapper.INSTANCE.toShort(fileDocumentRepository.findById(id)
                 .orElseThrow(() -> new Exception("Дамой бро")));
     }

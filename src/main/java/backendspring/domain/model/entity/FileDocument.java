@@ -1,13 +1,14 @@
-package backendspring.model.entity;
+package backendspring.domain.model.entity;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+
 @Getter
 @Setter
-@Entity
-@Table(name = "file_document")
+@Entity(name = "file_document")
+@Table(schema = "backend")
 public class FileDocument
 {
     @Id

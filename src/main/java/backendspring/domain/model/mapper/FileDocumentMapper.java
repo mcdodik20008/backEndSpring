@@ -1,7 +1,7 @@
-package backendspring.model.mapper;
+package backendspring.domain.model.mapper;
 
-import backendspring.model.entity.FileDocument;
-import backendspring.model.view.FileDocumentShort;
+import backendspring.domain.model.entity.FileDocument;
+import backendspring.domain.model.view.FileDocumentShort;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
