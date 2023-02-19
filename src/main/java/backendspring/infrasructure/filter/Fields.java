@@ -7,8 +7,13 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Filter {
+public class Fields {
 
-    List<Fields> objectFields;
+    String filed;
 
+    Operators operator;
+
+    String value;
+
+    List<Fields> childFields;
 }
