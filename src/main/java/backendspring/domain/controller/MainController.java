@@ -5,8 +5,12 @@ import backendspring.domain.model.entity.QFileDocument;
 import backendspring.domain.model.mapper.FileDocumentMapper;
 import backendspring.domain.model.view.FileDocumentShort;
 import backendspring.domain.repository.FileDocumentRepository;
+import backendspring.infrasructure.filter.Filter;
+import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
 import com.google.common.collect.Lists;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +23,11 @@ public class MainController {
 
     private final FileDocumentRepository fileDocumentRepository;
 
+    private final FilterToBooleanExpressionMapper filterMapper;
+
     @GetMapping
-    public List<FileDocument> getFileDocuments(
-//            @FilterParam(cls = FileDocument.class) BooleanExpression filter,
-//            Pageable pageable
-    ) {
+    public List<FileDocument> getFileDocuments(Filter filter, Pageable pageable) {
+        BooleanExpression exp = filterMapper.toBooleanExpression(filter);
         var q = QFileDocument.fileDocument.id.eq(1L).or(QFileDocument.fileDocument.id.eq(2L));
         var xx = fileDocumentRepository.findAll(q);
         return Lists.newArrayList(xx);
