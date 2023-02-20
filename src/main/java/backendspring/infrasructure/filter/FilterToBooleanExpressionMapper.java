@@ -27,9 +27,6 @@ public class FilterToBooleanExpressionMapper<T> {
     private BooleanExpression toBooleanExpression(List<Fields> objectFields) throws NoSuchFieldException {
         BooleanExpression exp = entityPath.isNull();
         for (var fieldInf : objectFields) {
-            if (!fieldInf.childFields.isEmpty()){
-                exp = exp.and(toBooleanExpression(fieldInf.childFields));
-            }
             Class fieldType = null;
             Field field = null;
             String[] names = fieldInf.filed.split("\\.");

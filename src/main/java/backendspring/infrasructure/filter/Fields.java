@@ -3,8 +3,6 @@ package backendspring.infrasructure.filter;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 public class Fields {
@@ -17,5 +15,4 @@ public class Fields {
 
     String logic;
 
-    List<Fields> childFields;
 }
