@@ -12,4 +12,5 @@ public interface CategoryMapper {
     Category toEntity(CategoryShort view);
 
     CategoryShort toShort(Category entity);
+
 }

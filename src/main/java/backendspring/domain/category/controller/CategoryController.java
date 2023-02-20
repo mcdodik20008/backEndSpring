@@ -26,7 +26,6 @@ public class CategoryController {
 
         @GetMapping
         public List<Category> getCategories(Filter filter, Pageable pageable) {
-            //BooleanExpression exp = filterMapper.toBooleanExpression(filter);
             Iterator<Category> categories = categoryRepository.findAll().iterator();
             return Lists.newArrayList(categories);
         }
@@ -38,22 +37,26 @@ public class CategoryController {
         }
 
         @PostMapping()
-        public Category postFileDocument(@RequestBody CategoryShort view) {
-            var c = CategoryMapper.INSTANCE.toEntity(view);
-            c.setId(null);
-            c.setName(c.name);
-            categoryRepository.save(c);
-            return c;
+        public Category postCategory(@RequestBody CategoryShort view) {
+            var categoryEntity = CategoryMapper.INSTANCE.toEntity(view);
+            categoryRepository.save(categoryEntity);
+            return categoryEntity;
         }
 
         @PutMapping("/{id}")
-        public CategoryShort putDoc(
+        public void updateCategory(
                 @PathVariable Long id,
                 @RequestBody CategoryShort view
         ) throws Exception {
-            var entity = categoryRepository.findById(id).orElseThrow(() -> new Exception("Not found"));
-            entity.setName(view.getName());
-            categoryRepository.save(entity);
-            return CategoryMapper.INSTANCE.toShort(entity);
+            var category = categoryRepository.findById(id).orElseThrow(() -> new Exception("Not found"));
+            category.setName(view.getName());
+            categoryRepository.save(category);
         }
+
+        @DeleteMapping("/{id}")
+        public void removeCategory(@PathVariable Long id) throws Exception {
+            var category = categoryRepository.findById(id).orElseThrow(() -> new Exception("Not found"));
+            categoryRepository.delete(category);
+        }
+
 }

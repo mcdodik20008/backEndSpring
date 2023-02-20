@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Setter
 @Entity(name = "category")
 public class Category {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,4 +17,5 @@ public class Category {
 
     @Column(name = "name")
     public String name;
+
 }
