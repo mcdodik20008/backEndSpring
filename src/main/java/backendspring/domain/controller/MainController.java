@@ -24,10 +24,10 @@ public class MainController {
 
     private final FileDocumentRepository fileDocumentRepository;
 
-    private final FilterToBooleanExpressionMapper filterMapper;
+    private final FilterToBooleanExpressionMapper<FileDocument> filterMapper;
 
     @GetMapping
-    public List<FileDocument> getFileDocuments(Filter filter, Pageable pageable) {
+    public List<FileDocument> getFileDocuments(Filter filter, Pageable pageable) throws NoSuchFieldException {
         BooleanExpression exp = filterMapper.toBooleanExpression(filter);
         BooleanExpression q = QFileDocument.fileDocument.id.eq(1L).or(QFileDocument.fileDocument.id.eq(2L));
         Iterator<FileDocument> xx = fileDocumentRepository.findAll(q).iterator();

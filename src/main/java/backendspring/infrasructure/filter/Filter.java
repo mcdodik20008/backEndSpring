@@ -9,6 +9,8 @@ import java.util.List;
 @Setter
 public class Filter {
 
+    String className;
+
     List<Fields> objectFields;
 
 }

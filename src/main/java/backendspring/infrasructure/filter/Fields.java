@@ -15,5 +15,7 @@ public class Fields {
 
     String value;
 
+    String logic;
+
     List<Fields> childFields;
 }
