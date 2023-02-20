@@ -1,18 +1,19 @@
 package backendspring.domain.controller;
 
 import backendspring.domain.model.entity.FileDocument;
-import backendspring.domain.model.entity.QFileDocument;
 import backendspring.domain.model.mapper.FileDocumentMapper;
 import backendspring.domain.model.view.FileDocumentShort;
 import backendspring.domain.repository.FileDocumentRepository;
 import backendspring.infrasructure.filter.Filter;
+import backendspring.domain.model.entity.QFileDocument;
 import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
-import com.google.common.collect.Lists;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.compress.utils.Lists;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 @CrossOrigin
@@ -28,8 +29,8 @@ public class MainController {
     @GetMapping
     public List<FileDocument> getFileDocuments(Filter filter, Pageable pageable) {
         BooleanExpression exp = filterMapper.toBooleanExpression(filter);
-        var q = QFileDocument.fileDocument.id.eq(1L).or(QFileDocument.fileDocument.id.eq(2L));
-        var xx = fileDocumentRepository.findAll(q);
+        BooleanExpression q = QFileDocument.fileDocument.id.eq(1L).or(QFileDocument.fileDocument.id.eq(2L));
+        Iterator<FileDocument> xx = fileDocumentRepository.findAll(q).iterator();
         return Lists.newArrayList(xx);
     }
 

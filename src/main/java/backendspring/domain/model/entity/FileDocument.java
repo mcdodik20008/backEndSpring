@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity(name = "file_document")
-@Table(schema = "backend")
 public class FileDocument
 {
     @Id
