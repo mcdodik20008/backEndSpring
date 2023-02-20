@@ -23,5 +23,4 @@ public class FileDocument
 
     @Column(name = "file_type")
     public String fileType;
-
 }
