@@ -6,7 +6,9 @@ import backendspring.domain.category.model.view.CategodyViewRead;
 import backendspring.domain.category.model.view.CategoryViewCreate;
 import backendspring.domain.category.repository.CategoryRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,11 +21,12 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CategoryService {
 
-    private final CategoryRepository repository;
+    CategoryRepository repository;
 
-    private final CategoryMapper mapper = CategoryMapper.INSTANCE;
+    CategoryMapper mapper = CategoryMapper.INSTANCE;
 
     public Page<CategodyViewRead> getCategories(BooleanExpression expression, Pageable pageable) {
         return repository.findAll(pageable).map(mapper::toViewRead);
