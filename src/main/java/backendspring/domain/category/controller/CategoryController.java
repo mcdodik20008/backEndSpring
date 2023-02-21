@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/categories", produces = "application/json")
 public class CategoryController {
 
-    private final FilterToBooleanExpressionMapper filterMapper;
+    private final FilterToBooleanExpressionMapper<Category> filterMapper;
 
     private final CategoryService service;
 
     @GetMapping
-    public Page<CategodyViewRead> getPage(Filter filter, Pageable pageable) {
-        var exp = filterMapper.toBooleanExpression(filter, Category.class);
+    public Page<CategodyViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
+        var exp = filterMapper.toBooleanExpression(filter);
         return service.getCategories(exp, pageable);
     }
 
