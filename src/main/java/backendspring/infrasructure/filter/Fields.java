@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class Fields {
 
-    String filed;
+    String field;
 
     Operators operator;
 

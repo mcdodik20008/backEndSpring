@@ -1,4 +1,4 @@
-package backendspring.domain.model.entity;
+package backendspring.domain.category.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,9 +7,9 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity(name = "file_document")
-public class FileDocument
-{
+@Entity(name = "category")
+public class Category {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +18,4 @@ public class FileDocument
     @Column(name = "name")
     public String name;
 
-    @Column(name = "file_path")
-    public String filePath;
-
-    @Column(name = "file_type")
-    public String fileType;
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FilterToBooleanExpressionMapper {
 
-    public BooleanExpression toBooleanExpression(Filter filter){
+    public <T> BooleanExpression toBooleanExpression(Filter filter, Class<T> tClass){
         return null;
     }
 
