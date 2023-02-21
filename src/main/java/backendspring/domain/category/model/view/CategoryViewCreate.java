@@ -5,9 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CategoryShort {
-
-    private Long id;
+public class CategoryViewCreate {
 
     private String name;
 
