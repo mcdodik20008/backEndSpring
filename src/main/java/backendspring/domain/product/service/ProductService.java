@@ -1,10 +1,10 @@
-package backendspring.domain.category.service;
+package backendspring.domain.product.service;
 
-import backendspring.domain.category.model.entity.Category;
-import backendspring.domain.category.model.mapper.CategoryMapper;
-import backendspring.domain.category.model.view.CategoryViewRead;
-import backendspring.domain.category.model.view.CategoryViewCreate;
-import backendspring.domain.category.repository.CategoryRepository;
+import backendspring.domain.product.model.entity.Product;
+import backendspring.domain.product.model.mapper.ProductMapper;
+import backendspring.domain.product.model.view.ProductViewCreate;
+import backendspring.domain.product.model.view.ProductViewRead;
+import backendspring.domain.product.repository.ProductRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,26 +22,26 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Transactional
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CategoryService {
+public class ProductService {
 
-    CategoryRepository repository;
+    ProductRepository repository;
 
-    CategoryMapper mapper = CategoryMapper.INSTANCE;
+    ProductMapper mapper = ProductMapper.INSTANCE;
 
-    public Page<CategoryViewRead> getCategories(BooleanExpression expression, Pageable pageable) {
+    public Page<ProductViewRead> getProducts(BooleanExpression expression, Pageable pageable) {
         return repository.findAll(pageable).map(mapper::toViewRead);
     }
 
-    public CategoryViewRead getOne(Long id) {
+    public ProductViewRead getOne(Long id) {
         return mapper.toViewRead(getObject(id));
     }
 
-    public Long create(CategoryViewCreate view) {
+    public Long create(ProductViewCreate view) {
         var entity = mapper.fromViewCreate(view);
         return repository.save(entity).getId();
     }
 
-    public void update(Long id, CategoryViewCreate view) {
+    public void update(Long id, ProductViewCreate view) {
         var entity = getObject(id);
         mapper.fromViewCreate(entity, view);
         repository.save(entity);
@@ -51,9 +51,10 @@ public class CategoryService {
         repository.deleteById(id);
     }
 
-    private Category getObject(Long id) {
+    private Product getObject(Long id) {
         return repository.findById(id).
                 orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
-                        "Не найдена категория с идентификатором " + id));
+                        "Не найден продукт с идентификатором " + id));
     }
+
 }

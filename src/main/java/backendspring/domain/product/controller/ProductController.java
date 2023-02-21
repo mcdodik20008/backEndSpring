@@ -1,9 +1,9 @@
-package backendspring.domain.category.controller;
+package backendspring.domain.product.controller;
 
-import backendspring.domain.category.model.entity.Category;
-import backendspring.domain.category.model.view.CategoryViewRead;
-import backendspring.domain.category.model.view.CategoryViewCreate;
-import backendspring.domain.category.service.CategoryService;
+import backendspring.domain.product.model.entity.Product;
+import backendspring.domain.product.model.view.ProductViewCreate;
+import backendspring.domain.product.model.view.ProductViewRead;
+import backendspring.domain.product.service.ProductService;
 import backendspring.infrasructure.filter.Filter;
 import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
 import lombok.AccessLevel;
@@ -17,32 +17,31 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping(value = "/categories", produces = "application/json")
-public class CategoryController {
+@RequestMapping(value = "/products", produces = "application/json")
+public class ProductController {
+    FilterToBooleanExpressionMapper<Product> filterMapper;
 
-    FilterToBooleanExpressionMapper<Category> filterMapper;
-
-    CategoryService service;
+    ProductService service;
 
     @GetMapping
-    public Page<CategoryViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
+    public Page<ProductViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
         var exp = filterMapper.toBooleanExpression(filter);
-        return service.getCategories(exp, pageable);
+        return service.getProducts(exp, pageable);
     }
 
     @GetMapping("/{id}")
-    public CategoryViewRead getOne(@PathVariable Long id) {
+    public ProductViewRead getOne(@PathVariable Long id) {
         return service.getOne(id);
     }
 
     @PostMapping
-    public CategoryViewRead create(@RequestBody CategoryViewCreate view) {
+    public ProductViewRead create(@RequestBody ProductViewCreate view) {
         Long id = service.create(view);
         return service.getOne(id);
     }
 
     @PutMapping("/{id}")
-    public CategoryViewRead update(@PathVariable Long id, @RequestBody CategoryViewCreate view) {
+    public ProductViewRead update(@PathVariable Long id, @RequestBody ProductViewCreate view) {
         service.update(id, view);
         return service.getOne(id);
     }
@@ -51,5 +50,4 @@ public class CategoryController {
     public void deleteById(@PathVariable Long id) {
         service.deleteById(id);
     }
-
 }

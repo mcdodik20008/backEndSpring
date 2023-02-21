@@ -10,12 +10,12 @@ import java.util.List;
 @Component
 public class FilterToBooleanExpressionMapper<T> {
 
-    private PathBuilder<T> entityPath;
+    private PathBuilder<Long> entityPath;
 
-    private Class<T> tClass;
+    private Class<Long> tClass;
 
-    public FilterToBooleanExpressionMapper(Class<T> tClass) {
-        this.tClass = tClass;
+    public FilterToBooleanExpressionMapper(/*Class<T> tClass*/) {
+        this.tClass = Long.class;
         entityPath = new PathBuilder<>(tClass, tClass.getName().toLowerCase());
     }
 
@@ -48,7 +48,7 @@ public class FilterToBooleanExpressionMapper<T> {
 
     @SuppressWarnings("unchecked")
     private void data() {
-        tClass = (Class<T>)
+        tClass = (Class<Long>)
                 ((ParameterizedType) getClass()
                         .getGenericSuperclass())
                         .getActualTypeArguments()[0];
