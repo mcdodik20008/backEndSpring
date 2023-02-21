@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CategodyViewRead {
+public class CategoryViewRead {
 
     private Long id;
 

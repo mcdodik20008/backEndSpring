@@ -1,7 +1,7 @@
 package backendspring.domain.category.controller;
 
 import backendspring.domain.category.model.entity.Category;
-import backendspring.domain.category.model.view.CategodyViewRead;
+import backendspring.domain.category.model.view.CategoryViewRead;
 import backendspring.domain.category.model.view.CategoryViewCreate;
 import backendspring.domain.category.service.CategoryService;
 import backendspring.infrasructure.filter.Filter;
@@ -25,24 +25,24 @@ public class CategoryController {
     CategoryService service;
 
     @GetMapping
-    public Page<CategodyViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
+    public Page<CategoryViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
         var exp = filterMapper.toBooleanExpression(filter);
         return service.getCategories(exp, pageable);
     }
 
     @GetMapping("/{id}")
-    public CategodyViewRead getOne(@PathVariable Long id) {
+    public CategoryViewRead getOne(@PathVariable Long id) {
         return service.getOne(id);
     }
 
     @PostMapping
-    public CategodyViewRead create(@RequestBody CategoryViewCreate view) {
+    public CategoryViewRead create(@RequestBody CategoryViewCreate view) {
         Long id = service.create(view);
         return service.getOne(id);
     }
 
     @PutMapping("/{id}")
-    public CategodyViewRead update(@PathVariable Long id, @RequestBody CategoryViewCreate view) {
+    public CategoryViewRead update(@PathVariable Long id, @RequestBody CategoryViewCreate view) {
         service.update(id, view);
         return service.getOne(id);
     }
