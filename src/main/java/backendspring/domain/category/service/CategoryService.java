@@ -54,6 +54,6 @@ public class CategoryService {
     private Category getObject(Long id) {
         return repository.findById(id).
                 orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
-                        "Не найдено животное с идентификатором " + id));
+                        "Не найдена категория с идентификатором " + id));
     }
 }

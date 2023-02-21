@@ -9,6 +9,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface CategoryMapper {
+
     CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
 
     CategoryViewRead toViewRead(Category entity);

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -19,7 +18,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @ManyToOne

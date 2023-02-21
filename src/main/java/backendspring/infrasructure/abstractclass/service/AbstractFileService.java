@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AbstractFileService<T extends JpaRepository> {
 
-    private final T repository;
+    private T repository;
 
     private final FilterToBooleanExpressionMapper mapper;
 
