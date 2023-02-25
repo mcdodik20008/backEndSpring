@@ -33,21 +33,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder devPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.NEVER)
+                    .sessionCreationPolicy(SessionCreationPolicy.NEVER) // не создаём сессию
                 .and()
-                .addFilterAt(new JwtCsrfFilter(jwtTokenRepository, resolver), CsrfFilter.class)
-                .csrf().ignoringAntMatchers("/**")
+                    .addFilterAt(new JwtCsrfFilter(jwtTokenRepository, resolver), CsrfFilter.class) // фильтруем с помощью токена
+                    .csrf().ignoringAntMatchers("/**")
                 .and()
-                .authorizeRequests()
-                .antMatchers("/auth/login")
-                .authenticated()
+                    .authorizeRequests()
+                    .antMatchers("/login")
+                    .authenticated()
                 .and()
-                .httpBasic()
-                .authenticationEntryPoint(((request, response, e) -> resolver.resolveException(request, response, null, e)));
+                    .httpBasic()
+                    .authenticationEntryPoint(((request, response, e) -> resolver.resolveException(request, response, null, e)))
+                              .and()
+                .formLogin();
     }
 
     @Override
