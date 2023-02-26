@@ -1,8 +1,8 @@
 package backendspring.domain.category.controller;
 
 import backendspring.domain.category.model.entity.Category;
-import backendspring.domain.category.model.view.CategoryViewRead;
 import backendspring.domain.category.model.view.CategoryViewCreate;
+import backendspring.domain.category.model.view.CategoryViewRead;
 import backendspring.domain.category.service.CategoryService;
 import backendspring.infrasructure.filter.Filter;
 import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -24,6 +25,7 @@ public class CategoryController {
 
     CategoryService service;
 
+    @PreAuthorize("@RoleService.hasAnyRole(@CommunityRole.VIEWER)")
     @GetMapping
     public Page<CategoryViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
         var exp = filterMapper.toBooleanExpression(filter);
@@ -35,12 +37,14 @@ public class CategoryController {
         return service.getOne(id);
     }
 
+    @PreAuthorize("@RoleService.hasAnyRole(@CommunityRole.ADMIN)")
     @PostMapping
     public CategoryViewRead create(@RequestBody CategoryViewCreate view) {
         Long id = service.create(view);
         return service.getOne(id);
     }
 
+    @PreAuthorize("@RoleService.hasAnyRole(@CommunityRole.EDITOR)")
     @PutMapping("/{id}")
     public CategoryViewRead update(@PathVariable Long id, @RequestBody CategoryViewCreate view) {
         service.update(id, view);

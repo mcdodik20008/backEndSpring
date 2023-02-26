@@ -12,8 +12,8 @@ public class ProductViewCreate {
 
     private CategoryViewRead category;
 
-    private Boolean controlled;
-
     private Double price;
+
+    private Boolean controlled;
 
 }

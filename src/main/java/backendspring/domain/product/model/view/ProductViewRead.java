@@ -1,6 +1,6 @@
 package backendspring.domain.product.model.view;
 
-import backendspring.domain.category.model.entity.Category;
+import backendspring.domain.category.model.view.CategoryViewRead;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,10 +12,10 @@ public class ProductViewRead {
 
     private String name;
 
+    private CategoryViewRead category;
+
     private Double price;
 
     private Boolean controlled;
-
-    private Category category;
 
 }
