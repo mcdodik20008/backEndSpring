@@ -21,11 +21,12 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeHttpRequests(customizer -> customizer.anyRequest().authenticated())
-
                 .httpBasic()
                 .authenticationEntryPoint((request, response, authException) -> response.sendError(201))
                 .and()
                 .formLogin()
+                .defaultSuccessUrl("/categories")
+                .permitAll()
                 .and()
                 .build();
     }
