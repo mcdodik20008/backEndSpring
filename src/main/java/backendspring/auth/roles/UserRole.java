@@ -3,6 +3,7 @@ package backendspring.auth.roles;
 import backendspring.auth.user.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
@@ -13,7 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @Entity(name = "auth_user_role")
-public class UserRole {
+public class UserRole implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -24,4 +25,9 @@ public class UserRole {
 
     @Enumerated(STRING)
     private DefaultRole type;
+
+    @Override
+    public String getAuthority() {
+        return type.toString();
+    }
 }
