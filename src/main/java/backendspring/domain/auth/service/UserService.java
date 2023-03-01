@@ -7,9 +7,12 @@ import backendspring.domain.auth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.HashSet;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 
 @Service
@@ -30,6 +33,12 @@ public class UserService {
 
 	public User findUserByUserName(String userName) {
 		return userRepository.findByUserName(userName);
+	}
+
+	public User getObject(Long id) {
+		return userRepository.findById(id)
+						.orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
+								"Не найден пользователь с идентификатором " + id));
 	}
 
 	public User saveUser(User user) {
