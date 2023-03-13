@@ -1,6 +1,6 @@
 package backendspring.domain.userorder.service;
 
-import backendspring.domain.auth.service.UserService;
+import backendspring.domain.user.service.UserService;
 import backendspring.domain.userorder.model.entity.UserOrder;
 import backendspring.domain.userorder.model.mapper.ProductMapper;
 import backendspring.domain.userorder.model.view.UserOrderViewCreate;

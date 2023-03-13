@@ -1,9 +1,9 @@
-package backendspring.domain.auth.service;
+package backendspring.domain.user.service;
 
 import backendspring.domain.auth.model.Role;
-import backendspring.domain.auth.model.User;
+import backendspring.domain.user.model.entity.User;
 import backendspring.domain.auth.repository.RoleRepository;
-import backendspring.domain.auth.repository.UserRepository;
+import backendspring.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,9 @@
 package backendspring.domain.userorder.model.entity;
 
-import backendspring.domain.auth.model.User;
+import backendspring.domain.user.model.entity.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -27,5 +28,8 @@ public class UserOrder{
     @OneToMany
     @JoinColumn(name = "user_order_id")
     private List<ProductOrder> productOrder;
+
+    @Formula("(SELECT COUNT  FROM  WHERE _dt.id = id)")
+    private Double summ;
 
 }
