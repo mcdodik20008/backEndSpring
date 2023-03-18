@@ -1,6 +1,9 @@
 package backendspring.domain.userorder.service;
 
+import backendspring.domain.user.model.entity.User;
+import backendspring.domain.user.repository.UserRepository;
 import backendspring.domain.user.service.UserService;
+import backendspring.domain.userorder.model.entity.OrderStatus;
 import backendspring.domain.userorder.model.entity.UserOrder;
 import backendspring.domain.userorder.model.mapper.ProductMapper;
 import backendspring.domain.userorder.model.view.UserOrderViewCreate;
@@ -31,6 +34,7 @@ public class UserOrderService {
     UserService userService;
 
     ProductMapper mapper = ProductMapper.INSTANCE;
+    private final UserRepository userRepository;
 
     public List<UserOrderViewRead> getList(Long userId) {
         return repository.findByUserIdOrderByOrderDateTime(userId).stream().map(mapper::toViewRead).toList();
@@ -77,4 +81,13 @@ public class UserOrderService {
                         "Не найден заказ с идентификатором " + id));
     }
 
+    public Long patchStatus(Long userId, Long orderId, OrderStatus orderStatus) {
+        if(OrderStatus.DONE.equals(orderStatus)){
+            User user = userRepository.findById(userId).get();
+            UserOrder order = repository.findById(orderId).get();
+            user.getUserRoom().setBonusPoints(user.getUserRoom().getBonusPoints() + (int) (order.getSum() / 100));
+            userRepository.save(user);
+        }
+        return 0L;
+    }
 }

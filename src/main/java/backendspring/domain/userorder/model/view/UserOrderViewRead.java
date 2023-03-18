@@ -17,4 +17,5 @@ public class UserOrderViewRead {
 
     private List<ProductOrder> productOrder;
 
+    private Double sum;
 }
