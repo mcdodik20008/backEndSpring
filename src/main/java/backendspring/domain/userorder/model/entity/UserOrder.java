@@ -20,9 +20,10 @@ public class UserOrder{
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "order_date_time")
     private LocalDateTime orderDateTime;
 
     @OneToMany
@@ -30,6 +31,6 @@ public class UserOrder{
     private List<ProductOrder> productOrder;
 
     @Formula("(SELECT COUNT  FROM  WHERE _dt.id = id)")
-    private Double summ;
+    private Double sum;
 
 }

@@ -1,42 +1,70 @@
 package backendspring.domain.user.service;
 
 import backendspring.domain.auth.model.Role;
-import backendspring.domain.user.model.entity.User;
 import backendspring.domain.auth.repository.RoleRepository;
+import backendspring.domain.user.model.entity.User;
 import backendspring.domain.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository repository;
 	
-	@Autowired
-	private RoleRepository roleRepository;
+
+	private final RoleRepository roleRepository;
 	
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public User findUserByEmail(String email) {
-		return userRepository.findByEmail(email);
+		return repository.findByEmail(email);
 	}
 
 	public User findUserByUserName(String userName) {
-		return userRepository.findByUserName(userName);
+		return repository.findByUserName(userName);
+	}
+
+	public Page<User> getPage(Pageable pageable) {
+		return repository.findAll(pageable);//.map(mapper::toViewRead);
+	}
+
+	public User getOne(Long id) {
+		return getObject(id);//mapper.toViewRead();
+	}
+
+	public Long create(User view) {
+		//var entity = mapper.fromViewCreate(view);
+		return repository.save(view).getId();
+	}
+
+	public void update(Long id, User view) {
+		var entity = getObject(id);
+		//mapper.fromViewCreate(entity, view);
+		entity.setActive(view.getActive());
+		entity.setName(view.getName());
+		entity.setEmail(view.getEmail());
+		repository.save(entity);
+	}
+
+	public void deleteById(Long id) {
+		repository.deleteById(id);
 	}
 
 	public User getObject(Long id) {
-		return userRepository.findById(id)
+		return repository.findById(id)
 						.orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
 								"Не найден пользователь с идентификатором " + id));
 	}
@@ -45,8 +73,8 @@ public class UserService {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(true);
 		Role userRole = roleRepository.findByRole("ADMIN");
-		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		return userRepository.save(user);
+		user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
+		return repository.save(user);
 	}
 
 }

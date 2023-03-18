@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class LoginController {
 
-	private UserService userService;
+	private final UserService userService;
 
 	@GetMapping(value = { "/", "/login" })
 	public ModelAndView login() {

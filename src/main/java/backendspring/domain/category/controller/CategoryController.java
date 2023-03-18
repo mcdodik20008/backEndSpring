@@ -1,10 +1,9 @@
 package backendspring.domain.category.controller;
 
 import backendspring.domain.category.model.entity.Category;
-import backendspring.domain.category.model.view.CategoryViewRead;
 import backendspring.domain.category.model.view.CategoryViewCreate;
+import backendspring.domain.category.model.view.CategoryViewRead;
 import backendspring.domain.category.service.CategoryService;
-import backendspring.infrasructure.filter.Filter;
 import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +26,8 @@ public class CategoryController {
 
 
     @GetMapping
-    public Page<CategoryViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
-        var exp = filterMapper.toBooleanExpression(filter);
-        return service.getCategories(exp, pageable);
+    public Page<CategoryViewRead> getPage(Pageable pageable) throws NoSuchFieldException {
+        return service.getCategories(pageable);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

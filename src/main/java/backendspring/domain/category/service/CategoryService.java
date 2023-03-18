@@ -2,10 +2,9 @@ package backendspring.domain.category.service;
 
 import backendspring.domain.category.model.entity.Category;
 import backendspring.domain.category.model.mapper.CategoryMapper;
-import backendspring.domain.category.model.view.CategoryViewRead;
 import backendspring.domain.category.model.view.CategoryViewCreate;
+import backendspring.domain.category.model.view.CategoryViewRead;
 import backendspring.domain.category.repository.CategoryRepository;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,7 +27,7 @@ public class CategoryService {
 
     CategoryMapper mapper = CategoryMapper.INSTANCE;
 
-    public Page<CategoryViewRead> getCategories(BooleanExpression expression, Pageable pageable) {
+    public Page<CategoryViewRead> getCategories(Pageable pageable) {
         return repository.findAll(pageable).map(mapper::toViewRead);
     }
 
