@@ -4,7 +4,6 @@ import backendspring.domain.product.model.entity.Product;
 import backendspring.domain.product.model.view.ProductViewCreate;
 import backendspring.domain.product.model.view.ProductViewRead;
 import backendspring.domain.product.service.ProductService;
-import backendspring.infrasructure.filter.Filter;
 import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +23,8 @@ public class ProductController {
     ProductService service;
 
     @GetMapping
-    public Page<ProductViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
-        var exp = filterMapper.toBooleanExpression(filter);
-        return service.getProducts(exp, pageable);
+    public Page<ProductViewRead> getPage(@RequestParam String name, Pageable pageable) throws NoSuchFieldException {
+        return service.getProducts(name, pageable);
     }
 
     @GetMapping("/{id}")

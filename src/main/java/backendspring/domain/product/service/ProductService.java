@@ -28,8 +28,15 @@ public class ProductService {
 
     ProductMapper mapper = ProductMapper.INSTANCE;
 
-    public Page<ProductViewRead> getProducts(BooleanExpression expression, Pageable pageable) {
-        return repository.findAll(pageable).map(mapper::toViewRead);
+    public Page<ProductViewRead> getProducts(String name, Pageable pageable) {
+        if (name == null) {
+            return repository.findAll(pageable).map(mapper::toViewRead);
+        }
+        if (name.equals("null")) {
+            return repository.findAll(pageable).map(mapper::toViewRead);
+        }
+        BooleanExpression exp = QProduct.product.name.like(name);
+        return repository.findByNameLike(name, pageable).map(mapper::toViewRead);
     }
 
     public ProductViewRead getOne(Long id) {
