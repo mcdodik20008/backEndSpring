@@ -1,6 +1,6 @@
 package backendspring.domain.userorder.model.entity;
 
-import backendspring.domain.point.model.DeliveryPoint;
+import backendspring.domain.point.model.entity.DeliveryPoint;
 import backendspring.domain.user.model.entity.User;
 import lombok.Getter;
 import lombok.Setter;

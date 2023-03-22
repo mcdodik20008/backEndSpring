@@ -1,4 +1,4 @@
-package backendspring.domain.point.model;
+package backendspring.domain.point.model.view;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,8 +7,7 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity(name = "delivery_point")
-public class DeliveryPoint {
+public class DeliveryPointViewCreate {
 
     @Id
     @Column(name = "id")
