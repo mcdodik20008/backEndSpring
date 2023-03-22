@@ -54,6 +54,6 @@ public class SubCategoryService {
     private SubCategory getObject(Long id) {
         return repository.findById(id).
                 orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
-                        "Не найдена категория с идентификатором " + id));
+                        "Не найдена подкатегория с идентификатором " + id));
     }
 }

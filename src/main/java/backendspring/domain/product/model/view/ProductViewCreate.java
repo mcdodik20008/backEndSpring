@@ -10,7 +10,7 @@ public class ProductViewCreate {
 
     private String name;
 
-    private ReferenceView category;
+    private ReferenceView subCategory;
 
     private Boolean controlled;
 

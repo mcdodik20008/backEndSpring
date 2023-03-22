@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping(value = "/categories", produces = "application/json")
+@RequestMapping(value = "/subcategories", produces = "application/json")
 public class SubCategoryController {
 
     FilterToBooleanExpressionMapper<SubCategory> filterMapper;

@@ -1,6 +1,7 @@
 package backendspring.domain.product.model.entity;
 
 import backendspring.domain.category.model.entity.Category;
+import backendspring.domain.subcategory.model.entity.SubCategory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,8 +25,8 @@ public class Product {
 
     @NotNull
     @ManyToOne(optional = false)
-    @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "fk_product_category"))
-    private Category category;
+    @JoinColumn(name = "subcategory_id", nullable = false, foreignKey = @ForeignKey(name = "fk_product_subcategory"))
+    private SubCategory subCategory;
 
     @Column(name = "controlled")
     private Boolean controlled;
