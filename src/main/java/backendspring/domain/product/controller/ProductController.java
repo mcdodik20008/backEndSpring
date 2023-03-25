@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping(value = "/products", produces = "application/json")
 public class ProductController {
+
     FilterToBooleanExpressionMapper<Product> filterMapper;
 
     ProductService service;
@@ -50,4 +51,5 @@ public class ProductController {
     public void deleteById(@PathVariable Long id) {
         service.deleteById(id);
     }
+
 }

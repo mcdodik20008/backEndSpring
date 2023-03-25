@@ -22,7 +22,7 @@ public class SubCategory {
     private String name;
 
     @NotNull
-    @ManyToOne()
+    @ManyToOne(optional = false)
     @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "fk_subcategory_parent"))
     private Category parentCategory;
 
