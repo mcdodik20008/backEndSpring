@@ -24,7 +24,6 @@ public class CategoryController {
 
     CategoryService service;
 
-
     @GetMapping
     public Page<CategoryViewRead> getPage(Pageable pageable) throws NoSuchFieldException {
         return service.getCategories(pageable);

@@ -25,7 +25,6 @@ public class SubCategoryController {
 
     SubCategoryService service;
 
-
     @GetMapping
     public Page<SubCategoryViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
         var exp = filterMapper.toBooleanExpression(filter);

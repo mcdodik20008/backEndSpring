@@ -20,7 +20,8 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "category_id")
+    @Column(name = "subcategories")
+    @OneToMany(mappedBy = "id")
     private List<SubCategory> subCategories;
 
 }
