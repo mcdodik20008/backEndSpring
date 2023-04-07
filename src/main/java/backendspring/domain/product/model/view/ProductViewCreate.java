@@ -1,7 +1,5 @@
 package backendspring.domain.product.model.view;
 
-import backendspring.domain.category.model.view.CategoryViewRead;
-import backendspring.domain.subcategory.model.view.SubCategoryViewCreate;
 import backendspring.domain.subcategory.model.view.SubCategoryViewRead;
 import lombok.Getter;
 import lombok.Setter;

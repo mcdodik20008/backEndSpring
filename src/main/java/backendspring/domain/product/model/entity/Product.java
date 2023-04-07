@@ -1,6 +1,5 @@
 package backendspring.domain.product.model.entity;
 
-import backendspring.domain.category.model.entity.Category;
 import backendspring.domain.subcategory.model.entity.SubCategory;
 import lombok.Getter;
 import lombok.Setter;
