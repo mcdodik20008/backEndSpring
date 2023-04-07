@@ -29,8 +29,13 @@ public class ProductController {
     }
 
     @GetMapping("category/{categoryId}")
-    public Page<ProductViewRead> getPage(@PathVariable Long categoryId, Pageable pageable) {
+    public Page<ProductViewRead> getPageWithCategories(@PathVariable Long categoryId, Pageable pageable) {
         return service.getProductsByCategory(categoryId, pageable);
+    }
+
+    @GetMapping("subcategories/{subcategoryId}")
+    public Page<ProductViewRead> getPageWithSubCategories(@PathVariable Long subcategoryId, Pageable pageable) {
+        return service.getProductsBySubCategory(subcategoryId, pageable);
     }
 
     @GetMapping("/{id}")

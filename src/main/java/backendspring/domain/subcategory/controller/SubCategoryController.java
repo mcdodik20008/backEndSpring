@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -28,7 +27,7 @@ public class SubCategoryController {
     @GetMapping
     public Page<SubCategoryViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
         var exp = filterMapper.toBooleanExpression(filter);
-        return service.getCategories(exp, pageable);
+        return service.getSubCategories(exp, pageable);
     }
 
 //    @PreAuthorize("hasAuthority('ADMIN')")

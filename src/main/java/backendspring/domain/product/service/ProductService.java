@@ -29,13 +29,10 @@ public class ProductService {
     ProductMapper mapper = ProductMapper.INSTANCE;
 
     public Page<ProductViewRead> getProducts(String name, Pageable pageable) {
-        if (name == null) {
+        if (name == null || name.equals("null")) {
             return repository.findAll(pageable).map(mapper::toViewRead);
         }
-        if (name.equals("null")) {
-            return repository.findAll(pageable).map(mapper::toViewRead);
-        }
-        BooleanExpression exp = QProduct.product.category.name.like(name);
+        BooleanExpression exp = QProduct.product.name.like(name);
         return repository.findByNameLike(name, pageable).map(mapper::toViewRead);
     }
 
@@ -68,7 +65,15 @@ public class ProductService {
         if (categoryId == null) {
             return repository.findAll(pageable).map(mapper::toViewRead);
         }
-        BooleanExpression exp = QProduct.product.category.id.eq(categoryId);
+        BooleanExpression exp = QProduct.product.subCategory.parentCategory.id.eq(categoryId);
+        return repository.findAll(exp, pageable).map(mapper::toViewRead);
+    }
+
+    public Page<ProductViewRead> getProductsBySubCategory(Long subcategoryId, Pageable pageable) {
+        if (subcategoryId == null) {
+            return repository.findAll(pageable).map(mapper::toViewRead);
+        }
+        BooleanExpression exp = QProduct.product.subCategory.id.eq(subcategoryId);
         return repository.findAll(exp, pageable).map(mapper::toViewRead);
     }
 }

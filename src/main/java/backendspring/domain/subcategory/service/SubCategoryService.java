@@ -28,7 +28,7 @@ public class SubCategoryService {
 
     SubCategoryMapper mapper = SubCategoryMapper.INSTANCE;
 
-    public Page<SubCategoryViewRead> getCategories(BooleanExpression expression, Pageable pageable) {
+    public Page<SubCategoryViewRead> getSubCategories(BooleanExpression expression, Pageable pageable) {
         return repository.findAll(pageable).map(mapper::toViewRead);
     }
 
