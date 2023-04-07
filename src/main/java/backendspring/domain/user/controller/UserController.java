@@ -1,9 +1,8 @@
-package backendspring.domain.category.controller;
+package backendspring.domain.user.controller;
 
 import backendspring.domain.category.model.entity.Category;
-import backendspring.domain.category.model.view.CategoryViewCreate;
-import backendspring.domain.category.model.view.CategoryViewRead;
-import backendspring.domain.category.service.CategoryService;
+import backendspring.domain.user.model.entity.User;
+import backendspring.domain.user.service.UserService;
 import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -17,33 +16,32 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping(value = "/categories", produces = "application/json")
-public class CategoryController {
+@RequestMapping(value = "/user", produces = "application/json")
+public class UserController {
 
     FilterToBooleanExpressionMapper<Category> filterMapper;
 
-    CategoryService service;
-
+    UserService service;
 
     @GetMapping
-    public Page<CategoryViewRead> getPage(Pageable pageable) throws NoSuchFieldException {
-        return service.getCategories(pageable);
+    public Page<User> getPage(Pageable pageable) throws NoSuchFieldException {
+        return service.getPage(pageable);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
-    public CategoryViewRead getOne(@PathVariable Long id) {
+    public User getOne(@PathVariable Long id) {
         return service.getOne(id);
     }
 
     @PostMapping
-    public CategoryViewRead create(@RequestBody CategoryViewCreate view) {
+    public User create(@RequestBody User view) {
         Long id = service.create(view);
         return service.getOne(id);
     }
 
     @PutMapping("/{id}")
-    public CategoryViewRead update(@PathVariable Long id, @RequestBody CategoryViewCreate view) {
+    public User update(@PathVariable Long id, @RequestBody User view) {
         service.update(id, view);
         return service.getOne(id);
     }

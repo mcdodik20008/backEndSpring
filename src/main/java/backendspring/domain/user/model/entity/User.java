@@ -1,5 +1,6 @@
-package backendspring.domain.auth.model;
+package backendspring.domain.user.model.entity;
 
+import backendspring.domain.auth.model.Role;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -47,4 +48,7 @@ public class User {
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
+
+    @Embedded
+    private UserRoom userRoom;
 }

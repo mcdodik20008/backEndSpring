@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -31,6 +32,7 @@ public class Product {
     @Column(name = "controlled")
     private Boolean controlled;
 
+    @Min(0)
     @Column(name = "price")
     private Double price;
 

@@ -1,6 +1,7 @@
 package backendspring.domain.userorder.controller;
 
 
+import backendspring.domain.userorder.model.entity.OrderStatus;
 import backendspring.domain.userorder.model.view.UserOrderViewCreate;
 import backendspring.domain.userorder.model.view.UserOrderViewRead;
 import backendspring.domain.userorder.service.UserOrderService;
@@ -38,6 +39,12 @@ public class UserOrderController {
     @PostMapping
     public UserOrderViewRead create(@PathVariable Long userId, @RequestBody UserOrderViewCreate view) {
         Long id = service.create(userId, view);
+        return service.getOne(userId, id);
+    }
+
+    @PatchMapping("order/{orderId}")
+    public UserOrderViewRead patchStatus(@PathVariable Long userId, @PathVariable Long orderId, @RequestBody OrderStatus orderStatus) {
+        Long id = service.patchStatus(userId, orderId, orderStatus);
         return service.getOne(userId, id);
     }
 

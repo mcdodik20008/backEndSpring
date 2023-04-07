@@ -1,6 +1,6 @@
-package backendspring.domain.auth.repository;
+package backendspring.domain.user.repository;
 
-import backendspring.domain.auth.model.User;
+import backendspring.domain.user.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +10,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findByUserName(String userName);
 
 	User findByEmail(String email);
+
 }

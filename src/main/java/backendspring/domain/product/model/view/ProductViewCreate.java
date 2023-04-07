@@ -1,6 +1,6 @@
 package backendspring.domain.product.model.view;
 
-import backendspring.infrasructure.view.ReferenceView;
+import backendspring.domain.category.model.view.CategoryViewRead;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,10 +10,9 @@ public class ProductViewCreate {
 
     private String name;
 
-    private ReferenceView subCategory;
-
     private Boolean controlled;
 
     private Double price;
 
+    private CategoryViewRead category;
 }

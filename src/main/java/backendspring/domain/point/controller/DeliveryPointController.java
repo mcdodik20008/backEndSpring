@@ -1,10 +1,8 @@
-package backendspring.domain.category.controller;
+package backendspring.domain.point.controller;
 
-import backendspring.domain.category.model.entity.Category;
-import backendspring.domain.category.model.view.CategoryViewCreate;
-import backendspring.domain.category.model.view.CategoryViewRead;
-import backendspring.domain.category.service.CategoryService;
-import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
+import backendspring.domain.point.model.entity.DeliveryPoint;
+import backendspring.domain.point.model.view.DeliveryPointViewCreate;
+import backendspring.domain.point.service.DeliveryPointService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,33 +15,31 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping(value = "/categories", produces = "application/json")
-public class CategoryController {
+@RequestMapping(value = "/delivery-point", produces = "application/json")
+public class DeliveryPointController {
 
-    FilterToBooleanExpressionMapper<Category> filterMapper;
-
-    CategoryService service;
+    DeliveryPointService service;
 
 
     @GetMapping
-    public Page<CategoryViewRead> getPage(Pageable pageable) throws NoSuchFieldException {
+    public Page<DeliveryPoint> getPage(Pageable pageable) throws NoSuchFieldException {
         return service.getCategories(pageable);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
-    public CategoryViewRead getOne(@PathVariable Long id) {
+    public DeliveryPoint getOne(@PathVariable Long id) {
         return service.getOne(id);
     }
 
     @PostMapping
-    public CategoryViewRead create(@RequestBody CategoryViewCreate view) {
+    public DeliveryPoint create(@RequestBody DeliveryPointViewCreate view) {
         Long id = service.create(view);
         return service.getOne(id);
     }
 
     @PutMapping("/{id}")
-    public CategoryViewRead update(@PathVariable Long id, @RequestBody CategoryViewCreate view) {
+    public DeliveryPoint update(@PathVariable Long id, @RequestBody DeliveryPointViewCreate view) {
         service.update(id, view);
         return service.getOne(id);
     }

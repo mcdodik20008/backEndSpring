@@ -1,7 +1,8 @@
 package backendspring.domain.auth.service;
 
 import backendspring.domain.auth.model.Role;
-import backendspring.domain.auth.model.User;
+import backendspring.domain.user.model.entity.User;
+import backendspring.domain.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

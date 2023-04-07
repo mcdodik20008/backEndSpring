@@ -1,6 +1,6 @@
 package backendspring.domain.userorder.model.view;
 
-import backendspring.infrasructure.view.ReferenceView;
+import backendspring.domain.product.model.view.ProductViewRead;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class ProductOrderViewCreate {
 
-    private ReferenceView product;
+    private ProductViewRead product;
 
     private Long countProduct;
 

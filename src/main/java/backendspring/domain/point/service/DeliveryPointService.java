@@ -1,10 +1,9 @@
-package backendspring.domain.category.service;
+package backendspring.domain.point.service;
 
-import backendspring.domain.category.model.entity.Category;
-import backendspring.domain.category.model.mapper.CategoryMapper;
-import backendspring.domain.category.model.view.CategoryViewCreate;
-import backendspring.domain.category.model.view.CategoryViewRead;
-import backendspring.domain.category.repository.CategoryRepository;
+import backendspring.domain.point.model.entity.DeliveryPoint;
+import backendspring.domain.point.model.mapper.DeliveryPointMapper;
+import backendspring.domain.point.model.view.DeliveryPointViewCreate;
+import backendspring.domain.point.repository.DeliveryPointRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -21,26 +20,26 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Transactional
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CategoryService {
+public class DeliveryPointService {
 
-    CategoryRepository repository;
+    DeliveryPointRepository repository;
 
-    CategoryMapper mapper = CategoryMapper.INSTANCE;
+    DeliveryPointMapper mapper = DeliveryPointMapper.INSTANCE;
 
-    public Page<CategoryViewRead> getCategories(Pageable pageable) {
-        return repository.findAll(pageable).map(mapper::toViewRead);
+    public Page<DeliveryPoint> getCategories(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
-    public CategoryViewRead getOne(Long id) {
-        return mapper.toViewRead(getObject(id));
+    public DeliveryPoint getOne(Long id) {
+        return getObject(id);
     }
 
-    public Long create(CategoryViewCreate view) {
+    public Long create(DeliveryPointViewCreate view) {
         var entity = mapper.fromViewCreate(view);
         return repository.save(entity).getId();
     }
 
-    public void update(Long id, CategoryViewCreate view) {
+    public void update(Long id, DeliveryPointViewCreate view) {
         var entity = getObject(id);
         mapper.fromViewCreate(entity, view);
         repository.save(entity);
@@ -50,7 +49,7 @@ public class CategoryService {
         repository.deleteById(id);
     }
 
-    private Category getObject(Long id) {
+    private DeliveryPoint getObject(Long id) {
         return repository.findById(id).
                 orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
                         "Не найдена категория с идентификатором " + id));
