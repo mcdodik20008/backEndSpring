@@ -7,7 +7,6 @@ import backendspring.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -27,7 +26,7 @@ public class UserService {
 	private final RoleRepository roleRepository;
 	
 
-	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	//private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public User findUserByEmail(String email) {
 		return repository.findByEmail(email);
@@ -70,7 +69,7 @@ public class UserService {
 	}
 
 	public User saveUser(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setPassword(user.getPassword()/*bCryptPasswordEncoder.encode()*/);
 		user.setActive(true);
 		Role userRole = roleRepository.findByRole("ADMIN");
 		user.setRoles(new HashSet<>(Collections.singletonList(userRole)));

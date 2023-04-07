@@ -35,7 +35,7 @@ public class ProductService {
         if (name.equals("null")) {
             return repository.findAll(pageable).map(mapper::toViewRead);
         }
-        BooleanExpression exp = QProduct.product.name.like(name);
+        BooleanExpression exp = QProduct.product.category.name.like(name);
         return repository.findByNameLike(name, pageable).map(mapper::toViewRead);
     }
 
@@ -64,4 +64,11 @@ public class ProductService {
                         "Не найден продукт с идентификатором " + id));
     }
 
+    public Page<ProductViewRead> getProductsByCategory(Long categoryId, Pageable pageable) {
+        if (categoryId == null) {
+            return repository.findAll(pageable).map(mapper::toViewRead);
+        }
+        BooleanExpression exp = QProduct.product.category.id.eq(categoryId);
+        return repository.findAll(exp, pageable).map(mapper::toViewRead);
+    }
 }

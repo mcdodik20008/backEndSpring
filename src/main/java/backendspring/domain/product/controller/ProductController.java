@@ -24,8 +24,13 @@ public class ProductController {
     ProductService service;
 
     @GetMapping
-    public Page<ProductViewRead> getPage(@RequestParam String name, Pageable pageable) throws NoSuchFieldException {
+    public Page<ProductViewRead> getPage(@RequestParam(required = false) String name, Pageable pageable) {
         return service.getProducts(name, pageable);
+    }
+
+    @GetMapping("category/{categoryId}")
+    public Page<ProductViewRead> getPage(@PathVariable Long categoryId, Pageable pageable) {
+        return service.getProductsByCategory(categoryId, pageable);
     }
 
     @GetMapping("/{id}")
