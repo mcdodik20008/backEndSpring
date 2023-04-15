@@ -1,4 +1,4 @@
-package backendspring.domain.user.model.entity;
+package backendspring.domain.auth.model.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;

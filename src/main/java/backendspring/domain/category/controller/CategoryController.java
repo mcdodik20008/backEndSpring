@@ -1,16 +1,13 @@
 package backendspring.domain.category.controller;
 
-import backendspring.domain.category.model.entity.Category;
 import backendspring.domain.category.model.view.CategoryViewCreate;
 import backendspring.domain.category.model.view.CategoryViewRead;
 import backendspring.domain.category.service.CategoryService;
-import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -20,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/categories", produces = "application/json")
 public class CategoryController {
 
-    FilterToBooleanExpressionMapper<Category> filterMapper;
-
     CategoryService service;
 
 
@@ -30,7 +25,7 @@ public class CategoryController {
         return service.getCategories(pageable);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public CategoryViewRead getOne(@PathVariable Long id) {
         return service.getOne(id);
