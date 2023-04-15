@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     public static User CURRENTUSER = null;
-    private final UserMapper mapper;
+    private final UserMapper mapper = UserMapper.INSTANCE;
     public final UserRepository repository;
 
     public UserNoPassword login(String login, String password){
