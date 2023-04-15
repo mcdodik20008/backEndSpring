@@ -16,7 +16,7 @@ public class UserService {
     public final UserRepository repository;
 
     public UserNoPassword login(String login, String password){
-        User user = repository.findByRoles_NameIgnoreCase(login).orElseThrow();
+        User user = repository.findByLogin(login).orElseThrow();
         CURRENTUSER = user;
         return mapper.toViewRead(user);
     }
