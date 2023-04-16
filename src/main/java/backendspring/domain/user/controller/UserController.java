@@ -1,8 +1,9 @@
-package backendspring.domain.point.controller;
+package backendspring.domain.user.controller;
 
-import backendspring.domain.point.model.entity.DeliveryPoint;
-import backendspring.domain.point.model.view.DeliveryPointViewCreate;
-import backendspring.domain.point.service.DeliveryPointService;
+import backendspring.domain.category.model.entity.Category;
+import backendspring.domain.user.model.entity.User;
+import backendspring.domain.user.service.UserService;
+import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -14,31 +15,32 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping(value = "/delivery-point", produces = "application/json")
-public class DeliveryPointController {
+@RequestMapping(value = "/user", produces = "application/json")
+public class UserController {
 
-    DeliveryPointService service;
+    FilterToBooleanExpressionMapper<Category> filterMapper;
 
+    UserService service;
 
     @GetMapping
-    public Page<DeliveryPoint> getPage(Pageable pageable) throws NoSuchFieldException {
-        return service.getCategories(pageable);
+    public Page<User> getPage(Pageable pageable) throws NoSuchFieldException {
+        return service.getPage(pageable);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
-    public DeliveryPoint getOne(@PathVariable Long id) {
+    public User getOne(@PathVariable Long id) {
         return service.getOne(id);
     }
 
     @PostMapping
-    public DeliveryPoint create(@RequestBody DeliveryPointViewCreate view) {
+    public User create(@RequestBody User view) {
         Long id = service.create(view);
         return service.getOne(id);
     }
 
     @PutMapping("/{id}")
-    public DeliveryPoint update(@PathVariable Long id, @RequestBody DeliveryPointViewCreate view) {
+    public User update(@PathVariable Long id, @RequestBody User view) {
         service.update(id, view);
         return service.getOne(id);
     }

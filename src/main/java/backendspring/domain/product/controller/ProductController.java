@@ -1,8 +1,10 @@
 package backendspring.domain.product.controller;
 
+import backendspring.domain.product.model.entity.Product;
 import backendspring.domain.product.model.view.ProductViewCreate;
 import backendspring.domain.product.model.view.ProductViewRead;
 import backendspring.domain.product.service.ProductService;
+import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,11 +19,23 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/products", produces = "application/json")
 public class ProductController {
 
+    FilterToBooleanExpressionMapper<Product> filterMapper;
+
     ProductService service;
 
     @GetMapping
-    public Page<ProductViewRead> getPage(@RequestParam String name, Pageable pageable) throws NoSuchFieldException {
+    public Page<ProductViewRead> getPage(@RequestParam(required = false) String name, Pageable pageable) {
         return service.getProducts(name, pageable);
+    }
+
+    @GetMapping("category/{categoryId}")
+    public Page<ProductViewRead> getPageWithCategories(@PathVariable Long categoryId, Pageable pageable) {
+        return service.getProductsByCategory(categoryId, pageable);
+    }
+
+    @GetMapping("subcategories/{subcategoryId}")
+    public Page<ProductViewRead> getPageWithSubCategories(@PathVariable Long subcategoryId, Pageable pageable) {
+        return service.getProductsBySubCategory(subcategoryId, pageable);
     }
 
     @GetMapping("/{id}")
@@ -45,4 +59,5 @@ public class ProductController {
     public void deleteById(@PathVariable Long id) {
         service.deleteById(id);
     }
+
 }

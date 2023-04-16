@@ -1,6 +1,7 @@
 package backendspring.domain.product.model.view;
 
-import backendspring.domain.category.model.view.CategoryViewRead;
+import backendspring.domain.subcategory.model.entity.SubCategory;
+import backendspring.domain.subcategory.model.view.SubCategoryViewRead;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,5 +15,5 @@ public class ProductViewCreate {
 
     private Double price;
 
-    private CategoryViewRead category;
+    private SubCategoryViewRead subCategory;
 }
