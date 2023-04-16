@@ -25,7 +25,7 @@ public class DeliveryPointController {
         return service.getCategories(pageable);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public DeliveryPoint getOne(@PathVariable Long id) {
         return service.getOne(id);
