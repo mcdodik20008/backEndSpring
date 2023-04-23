@@ -3,6 +3,8 @@ package backendspring.domain.auth.controller;
 import backendspring.domain.auth.model.entity.User;
 import backendspring.domain.auth.model.view.UserNoPassword;
 import backendspring.domain.auth.service.UserService;
+import backendspring.domain.category.model.view.CategoryViewCreate;
+import backendspring.domain.category.model.view.CategoryViewRead;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -38,5 +40,11 @@ public class AuthController {
     @PatchMapping("/favorites/{userId}")
     public Set<Long> pathFavorites(@PathVariable Long userId, @RequestBody  Set<Long> favorites) {
         return service.pathFavorites(userId, favorites);
+    }
+
+    @PutMapping("/{id}")
+    public UserNoPassword update(@PathVariable Long id, @RequestBody UserNoPassword view) {
+        service.update(id, view);
+        return service.getOneAsView(id);
     }
 }

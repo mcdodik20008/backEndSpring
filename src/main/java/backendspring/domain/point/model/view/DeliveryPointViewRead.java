@@ -10,7 +10,9 @@ import javax.persistence.Id;
 
 @Getter
 @Setter
-public class DeliveryPointViewCreate {
+public class DeliveryPointViewRead {
+
+    private Long id;
 
     private String name;
 

@@ -54,7 +54,7 @@ public class UserOrderService {
         var entity = mapper.fromViewCreate(view);
         entity.setProductOrder(productOrderRepository.saveAll(entity.getProductOrder()));
         productOrderRepository.flush();
-        entity.setUser(userService.getOne(userId));
+        entity.setUser(userService.getOneAsObject(userId));
         entity = repository.save(entity);
         repository.flush();
         return entity.getId();
