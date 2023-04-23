@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class UserNoPassword {
+public class UserViewRead {
 
     private Long id;
 

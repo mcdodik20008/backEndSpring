@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -47,13 +45,11 @@ public class User implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-    @Size(min=11,max=11)
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @NotNull
     @ManyToOne
-    @JoinColumn(name = "delivery_point_id", nullable = false, foreignKey = @ForeignKey(name = "fk_default_delivery_point"))
+    @JoinColumn(name = "delivery_point_id", nullable = true, foreignKey = @ForeignKey(name = "fk_default_delivery_point"))
     private DeliveryPoint deliveryPoint;
 
 }

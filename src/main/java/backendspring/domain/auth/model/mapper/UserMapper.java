@@ -1,7 +1,9 @@
 package backendspring.domain.auth.model.mapper;
 
 import backendspring.domain.auth.model.entity.User;
-import backendspring.domain.auth.model.view.UserNoPassword;
+import backendspring.domain.auth.model.view.UserViewCreate;
+import backendspring.domain.auth.model.view.UserViewRead;
+import backendspring.domain.auth.model.view.UserViewUpdate;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
@@ -11,8 +13,10 @@ public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    UserNoPassword toViewRead(User entity);
+    UserViewRead toViewRead(User entity);
 
-    User fromViewCreate(@MappingTarget User entity, UserNoPassword view);
+    User fromViewUpdate(@MappingTarget User entity, UserViewUpdate view);
+
+    User fromViewUpdate(UserViewCreate view);
 
 }

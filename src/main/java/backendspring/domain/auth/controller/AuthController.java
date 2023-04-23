@@ -1,7 +1,8 @@
 package backendspring.domain.auth.controller;
 
-import backendspring.domain.auth.model.entity.User;
-import backendspring.domain.auth.model.view.UserNoPassword;
+import backendspring.domain.auth.model.view.UserViewCreate;
+import backendspring.domain.auth.model.view.UserViewRead;
+import backendspring.domain.auth.model.view.UserViewUpdate;
 import backendspring.domain.auth.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class AuthController {
     private final UserService service;
 
     @GetMapping("/login")
-    public UserNoPassword login(String login, String password) {
+    public UserViewRead login(String login, String password) {
         return service.login(login, password);
     }
 
@@ -30,18 +31,17 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public Boolean registration(User user) {
+    public Boolean registration(UserViewCreate user) {
         return service.registration(user);
     }
 
     @PatchMapping("/favorites/{userId}")
-    public Set<Long> pathFavorites(@PathVariable Long userId, @RequestBody  Set<Long> favorites) {
+    public Set<Long> pathFavorites(@PathVariable Long userId, @RequestBody Set<Long> favorites) {
         return service.pathFavorites(userId, favorites);
     }
 
-    @PutMapping("/{id}")
-    public UserNoPassword update(@PathVariable Long id, @RequestBody UserNoPassword view) {
-        service.update(id, view);
-        return service.getOneAsView(id);
+    @PutMapping("/{userId}")
+    public UserViewRead update(@PathVariable Long userId, @RequestBody UserViewUpdate view) {
+        return service.update(userId, view);
     }
 }

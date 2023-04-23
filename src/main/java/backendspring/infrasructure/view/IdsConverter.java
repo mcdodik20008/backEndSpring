@@ -9,11 +9,10 @@ import java.util.stream.Collectors;
 @Converter
 public class IdsConverter implements AttributeConverter<Set<Long>, String> {
 
-
     @Override
     public String convertToDatabaseColumn(Set<Long> longs) {
         if (longs == null || longs.size() == 0)
-            return "Пусто";
+            return "";
         return longs.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(","));
@@ -25,4 +24,5 @@ public class IdsConverter implements AttributeConverter<Set<Long>, String> {
             return Set.of();
        return Arrays.stream(s.split(",")).map(Long::valueOf).collect(Collectors.toSet());
     }
+
 }

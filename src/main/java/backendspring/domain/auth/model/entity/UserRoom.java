@@ -19,4 +19,5 @@ public class UserRoom {
 
     @Column(name = "bonus_points")
     private Integer bonusPoints;
+
 }
