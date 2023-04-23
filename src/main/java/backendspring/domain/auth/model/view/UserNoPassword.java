@@ -19,6 +19,8 @@ public class UserNoPassword {
 
     private Set<Role> roles;
 
+    private Set<Long> favorites;
+
     private UserRoom userRoom;
 
 }

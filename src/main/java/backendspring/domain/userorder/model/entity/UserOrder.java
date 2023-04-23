@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "user_order")
-public class UserOrder{
+public class UserOrder implements Serializable {
 
     @Id
     @Column(name = "id")

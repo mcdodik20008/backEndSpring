@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Entity(name = "delivery_point")
-public class DeliveryPoint {
+public class DeliveryPoint implements Serializable {
 
     @Id
     @Column(name = "id")

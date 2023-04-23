@@ -1,11 +1,8 @@
 package backendspring.domain.subcategory.controller;
 
-import backendspring.domain.subcategory.model.entity.SubCategory;
 import backendspring.domain.subcategory.model.view.SubCategoryViewCreate;
 import backendspring.domain.subcategory.model.view.SubCategoryViewRead;
 import backendspring.domain.subcategory.service.SubCategoryService;
-import backendspring.infrasructure.filter.Filter;
-import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,17 +17,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/subcategories", produces = "application/json")
 public class SubCategoryController {
 
-    FilterToBooleanExpressionMapper<SubCategory> filterMapper;
-
     SubCategoryService service;
 
     @GetMapping
-    public Page<SubCategoryViewRead> getPage(Filter filter, Pageable pageable) throws NoSuchFieldException {
-        var exp = filterMapper.toBooleanExpression(filter);
-        return service.getSubCategories(exp, pageable);
+    public Page<SubCategoryViewRead> getPage(Pageable pageable) throws NoSuchFieldException {
+        return service.getSubCategories(pageable);
     }
 
-//    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public SubCategoryViewRead getOne(@PathVariable Long id) {
         return service.getOne(id);

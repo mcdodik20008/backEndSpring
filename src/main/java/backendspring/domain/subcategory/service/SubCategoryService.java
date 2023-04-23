@@ -5,7 +5,6 @@ import backendspring.domain.subcategory.model.mapper.SubCategoryMapper;
 import backendspring.domain.subcategory.model.view.SubCategoryViewCreate;
 import backendspring.domain.subcategory.model.view.SubCategoryViewRead;
 import backendspring.domain.subcategory.repository.SubCategoryRepository;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,7 +27,7 @@ public class SubCategoryService {
 
     SubCategoryMapper mapper = SubCategoryMapper.INSTANCE;
 
-    public Page<SubCategoryViewRead> getSubCategories(BooleanExpression expression, Pageable pageable) {
+    public Page<SubCategoryViewRead> getSubCategories(Pageable pageable) {
         return repository.findAll(pageable).map(mapper::toViewRead);
     }
 

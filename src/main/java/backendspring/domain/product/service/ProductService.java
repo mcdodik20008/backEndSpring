@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -33,11 +34,15 @@ public class ProductService {
             return repository.findAll(pageable).map(mapper::toViewRead);
         }
         BooleanExpression exp = QProduct.product.name.like(name);
-        return repository.findByNameLike(name, pageable).map(mapper::toViewRead);
+        return repository.findAll(exp, pageable).map(mapper::toViewRead);
     }
 
     public ProductViewRead getOne(Long id) {
         return mapper.toViewRead(getObject(id));
+    }
+
+    public List<ProductViewRead> getList(List<Long> ids) {
+        return repository.findByIdIn(ids).stream().map(mapper::toViewRead).toList();
     }
 
     public Long create(ProductViewCreate view) {

@@ -1,5 +1,8 @@
 package backendspring.domain.userorder.service;
 
+import backendspring.domain.auth.model.entity.User;
+import backendspring.domain.auth.repository.UserRepository;
+import backendspring.domain.auth.service.UserService;
 import backendspring.domain.userorder.model.entity.OrderStatus;
 import backendspring.domain.userorder.model.entity.UserOrder;
 import backendspring.domain.userorder.model.mapper.ProductMapper;
@@ -28,10 +31,10 @@ public class UserOrderService {
 
     ProductOrderRepository productOrderRepository;
 
-//    UserService userService;
+    UserService userService;
 
     ProductMapper mapper = ProductMapper.INSTANCE;
-//    private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public List<UserOrderViewRead> getList(Long userId) {
         return repository.findByUserIdOrderByOrderDateTime(userId).stream().map(mapper::toViewRead).toList();
@@ -51,7 +54,7 @@ public class UserOrderService {
         var entity = mapper.fromViewCreate(view);
         entity.setProductOrder(productOrderRepository.saveAll(entity.getProductOrder()));
         productOrderRepository.flush();
-//        entity.setUser(userService.getObject(userId));
+        entity.setUser(userService.getOne(userId));
         entity = repository.save(entity);
         repository.flush();
         return entity.getId();
@@ -80,10 +83,10 @@ public class UserOrderService {
 
     public Long patchStatus(Long userId, Long orderId, OrderStatus orderStatus) {
         if(OrderStatus.DONE.equals(orderStatus)){
-//            User user = userRepository.findById(userId).get();
-//            UserOrder order = repository.findById(orderId).get();
-//            user.getUserRoom().setBonusPoints(user.getUserRoom().getBonusPoints() + (int) (order.getSum() / 100));
-//            userRepository.save(user);
+            User user = userRepository.findById(userId).get();
+            UserOrder order = repository.findById(orderId).get();
+            user.getUserRoom().setBonusPoints(user.getUserRoom().getBonusPoints() + (int) (order.getSum() / 100));
+            userRepository.save(user);
         }
         return 0L;
     }

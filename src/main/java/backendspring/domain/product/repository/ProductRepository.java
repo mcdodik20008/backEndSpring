@@ -1,13 +1,13 @@
 package backendspring.domain.product.repository;
 
 import backendspring.domain.product.model.entity.Product;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
-public interface ProductRepository extends JpaRepository<Product, Long>, QuerydslPredicateExecutor<Product> {
+import java.util.Collection;
+import java.util.List;
 
-    Page<Product> findByNameLike(String name, Pageable page);
+public interface ProductRepository extends JpaRepository<Product, Long>, QuerydslPredicateExecutor<Product> {
+    List<Product> findByIdIn(Collection<Long> ids);
 
 }

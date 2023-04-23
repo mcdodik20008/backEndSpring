@@ -1,14 +1,15 @@
 package backendspring.domain.auth.controller;
 
+import backendspring.domain.auth.model.entity.User;
 import backendspring.domain.auth.model.view.UserNoPassword;
 import backendspring.domain.auth.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -27,5 +28,15 @@ public class AuthController {
     @GetMapping("/logout")
     public Boolean logout() {
         return service.logout();
+    }
+
+    @PostMapping("/registration")
+    public Boolean registration(User user) {
+        return service.registration(user);
+    }
+
+    @PatchMapping("/favorites/{userId}")
+    public Set<Long> pathFavorites(@PathVariable Long userId, @RequestBody  Set<Long> favorites) {
+        return service.pathFavorites(userId, favorites);
     }
 }

@@ -7,13 +7,14 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Getter
 @Setter
 @Entity(name = "product")
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @Column(name = "id")

@@ -1,10 +1,8 @@
 package backendspring.domain.product.controller;
 
-import backendspring.domain.product.model.entity.Product;
 import backendspring.domain.product.model.view.ProductViewCreate;
 import backendspring.domain.product.model.view.ProductViewRead;
 import backendspring.domain.product.service.ProductService;
-import backendspring.infrasructure.filter.FilterToBooleanExpressionMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,8 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping(value = "/products", produces = "application/json")
 public class ProductController {
-
-    FilterToBooleanExpressionMapper<Product> filterMapper;
 
     ProductService service;
 

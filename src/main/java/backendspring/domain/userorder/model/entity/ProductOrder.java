@@ -5,11 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Entity(name = "product_order")
-public class ProductOrder {
+public class ProductOrder implements Serializable {
 
     @Id
     @Column(name = "id")
