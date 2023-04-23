@@ -15,4 +15,8 @@ public class DeliveryPointViewCreate {
 
     private String workEnd;
 
+    private Double latitude;
+
+    private Double longitude;
+
 }

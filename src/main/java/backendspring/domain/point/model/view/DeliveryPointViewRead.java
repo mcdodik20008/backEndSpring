@@ -17,4 +17,8 @@ public class DeliveryPointViewRead {
 
     private String workEnd;
 
+    private Double latitude;
+
+    private Double longitude;
+
 }

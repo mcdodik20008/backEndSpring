@@ -27,4 +27,10 @@ public class DeliveryPoint implements Serializable {
 
     @Column(name = "work_end")
     private String workEnd;
+
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
 }
