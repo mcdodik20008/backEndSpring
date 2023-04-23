@@ -4,8 +4,6 @@ import backendspring.domain.auth.model.entity.User;
 import backendspring.domain.auth.model.mapper.UserMapper;
 import backendspring.domain.auth.model.view.UserNoPassword;
 import backendspring.domain.auth.repository.UserRepository;
-import backendspring.domain.category.model.entity.Category;
-import backendspring.domain.subcategory.model.view.SubCategoryViewCreate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

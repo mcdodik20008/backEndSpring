@@ -3,14 +3,11 @@ package backendspring.domain.auth.controller;
 import backendspring.domain.auth.model.entity.User;
 import backendspring.domain.auth.model.view.UserNoPassword;
 import backendspring.domain.auth.service.UserService;
-import backendspring.domain.category.model.view.CategoryViewCreate;
-import backendspring.domain.category.model.view.CategoryViewRead;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 @CrossOrigin

@@ -2,7 +2,6 @@ package backendspring.domain.auth.model.view;
 
 import backendspring.domain.auth.model.entity.Role;
 import backendspring.domain.auth.model.entity.UserRoom;
-import backendspring.domain.point.model.entity.DeliveryPoint;
 import backendspring.domain.point.model.view.DeliveryPointViewRead;
 import lombok.Getter;
 import lombok.Setter;
