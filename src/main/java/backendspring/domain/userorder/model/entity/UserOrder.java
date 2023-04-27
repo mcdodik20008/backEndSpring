@@ -49,10 +49,8 @@ public class UserOrder implements Serializable {
     @JoinColumn(name = "delivery_point_id")
     private DeliveryPoint deliveryPoint;
 
-    /**
-     * Закрыта чи не (статус)
-     */
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
 }

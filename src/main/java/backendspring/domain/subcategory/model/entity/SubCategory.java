@@ -1,7 +1,6 @@
 package backendspring.domain.subcategory.model.entity;
 
 import backendspring.domain.category.model.entity.Category;
-import backendspring.domain.category.model.view.CategoryViewRead;
 import lombok.Getter;
 import lombok.Setter;
 

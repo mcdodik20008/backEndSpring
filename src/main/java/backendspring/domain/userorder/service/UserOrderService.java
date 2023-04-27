@@ -82,7 +82,7 @@ public class UserOrderService {
     }
 
     public Long patchStatus(Long userId, Long orderId, OrderStatus orderStatus) {
-        if(OrderStatus.DONE.equals(orderStatus)){
+        if (OrderStatus.DONE.equals(orderStatus)) {
             User user = userRepository.findById(userId).get();
             UserOrder order = repository.findById(orderId).get();
             user.getUserRoom().setBonusPoints(user.getUserRoom().getBonusPoints() + (int) (order.getSum() / 100));
