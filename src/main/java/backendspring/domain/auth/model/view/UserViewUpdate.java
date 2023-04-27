@@ -16,4 +16,6 @@ public class UserViewUpdate {
 
     private DeliveryPointViewRead deliveryPoint;
 
+    private String phoneNumber;
+
 }

@@ -1,6 +1,6 @@
 package backendspring.domain.userorder.model.view;
 
-import backendspring.domain.userorder.model.entity.ProductOrder;
+import backendspring.domain.userorder.model.entity.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +18,7 @@ public class UserOrderViewRead {
     private List<ProductOrderViewRead> productOrder;
 
     private Double sum;
+
+    private OrderStatus status;
 
 }
