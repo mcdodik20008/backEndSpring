@@ -1,6 +1,7 @@
 package backendspring.domain.subcategory.model.entity;
 
 import backendspring.domain.category.model.entity.Category;
+import backendspring.domain.category.model.view.CategoryViewRead;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +23,7 @@ public class SubCategory implements Serializable {
     private String name;
 
     @NotNull
-    @ManyToOne(optional = false)
+    @ManyToOne()
     @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "fk_subcategory_parent"))
     private Category parentCategory;
 

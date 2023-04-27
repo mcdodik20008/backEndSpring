@@ -15,7 +15,8 @@ public class UserOrderViewRead {
 
     private LocalDateTime orderDateTime;
 
-    private List<ProductOrder> productOrder;
+    private List<ProductOrderViewRead> productOrder;
 
     private Double sum;
+
 }

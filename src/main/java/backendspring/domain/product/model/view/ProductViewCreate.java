@@ -15,4 +15,5 @@ public class ProductViewCreate {
     private Double price;
 
     private SubCategoryViewRead subCategory;
+
 }
