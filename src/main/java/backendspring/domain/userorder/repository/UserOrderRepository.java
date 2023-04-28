@@ -12,5 +12,7 @@ public interface UserOrderRepository extends JpaRepository<UserOrder, Long>, Que
 
     UserOrder findByUserIdAndId(Long userId, Long id);
 
+    List<UserOrder> findByDeliveryPointId(Long id);
+
     List<UserOrder> findByUserIdOrderByOrderDateTime(Long userId);
 }

@@ -16,39 +16,44 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping(value = "/user-order/{userId}", produces = "application/json")
+@RequestMapping(value = "/user-order", produces = "application/json")
 public class UserOrderController {
 
     UserOrderService service;
 
-    @GetMapping
+    @GetMapping("/{userId}")
     public List<UserOrderViewRead> getList(@PathVariable Long userId) {
         return service.getList(userId);
     }
 
-    @GetMapping("/last")
+    @GetMapping("/last/{userId}")
     public UserOrderViewRead getLast(@PathVariable Long userId) {
         return service.getLastOrder(userId);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{userId}/{id}")
     public UserOrderViewRead getOne(@PathVariable Long userId, @PathVariable Long id) {
         return service.getOne(userId, id);
     }
 
-    @PostMapping
+    @GetMapping("/delivery-point/{id}")
+    public List<UserOrderViewRead> getOne(@PathVariable Long id) {
+        return service.getListByDeliveryPointId(id);
+    }
+
+    @PostMapping("/{userId}")
     public UserOrderViewRead create(@PathVariable Long userId, @RequestBody UserOrderViewCreate view) {
         Long id = service.create(userId, view);
         return service.getOne(userId, id);
     }
 
-    @PatchMapping("order/{orderId}")
+    @PatchMapping("/{userId}/order/{orderId}")
     public UserOrderViewRead patchStatus(@PathVariable Long userId, @PathVariable Long orderId, @RequestBody OrderStatus orderStatus) {
         Long id = service.patchStatus(userId, orderId, orderStatus);
         return service.getOne(userId, id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{userId}/{id}")
     public UserOrderViewRead update(
             @PathVariable Long userId,
             @PathVariable Long id,
@@ -58,7 +63,7 @@ public class UserOrderController {
         return service.getOne(userId, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{userId}/{id}")
     public void deleteById(@PathVariable Long userId, @PathVariable Long id) {
         service.deleteById(userId, id);
     }

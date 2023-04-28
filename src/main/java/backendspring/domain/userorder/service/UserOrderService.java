@@ -50,6 +50,16 @@ public class UserOrderService {
         return mapper.toViewRead(order);
     }
 
+    public List<UserOrderViewRead> getListByDeliveryPointId(Long id) {
+        var orders = repository.findByDeliveryPointId(id).stream().map(mapper::toViewRead).toList();
+        if (orders.isEmpty())
+            throw new ResponseStatusException(
+                    NOT_FOUND,
+                    "Не найдены заказы, доставленные в точку с идентификатором " + id);
+        else
+            return orders;
+    }
+
     public Long create(Long userId, UserOrderViewCreate view) {
         var entity = mapper.fromViewCreate(view);
         entity.setProductOrder(productOrderRepository.saveAll(entity.getProductOrder()));
