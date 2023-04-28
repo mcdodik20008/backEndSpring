@@ -79,7 +79,7 @@ public class UserOrderService {
 
     public void update(Long userId, Long id, UserOrderViewCreate view) {
         var entity = getObject(id);
-        if (entity.getUser().getId() != userId)
+        if (entity.getUser().getId().equals(userId))
             throw new RuntimeException("Ошибка!");
         mapper.fromViewCreate(entity, view);
         repository.save(entity);
