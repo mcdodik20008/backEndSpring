@@ -1,5 +1,6 @@
 package backendspring.domain.userorder.model.view;
 
+import backendspring.domain.point.model.view.DeliveryPointViewRead;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,5 +11,7 @@ import java.util.List;
 public class UserOrderViewCreate {
 
     private List<ProductOrderViewCreate> productOrder;
+
+    private DeliveryPointViewRead deliveryPoint;
 
 }
