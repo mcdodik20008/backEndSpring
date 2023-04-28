@@ -3,6 +3,7 @@ package backendspring.domain.userorder.model.mapper;
 import backendspring.domain.userorder.model.entity.UserOrder;
 import backendspring.domain.userorder.model.view.UserOrderViewCreate;
 import backendspring.domain.userorder.model.view.UserOrderViewRead;
+import backendspring.domain.userorder.model.view.UserOrderViewUpdate;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
@@ -17,5 +18,7 @@ public interface ProductMapper {
     UserOrder fromViewCreate(UserOrderViewCreate view);
 
     UserOrder fromViewCreate(@MappingTarget UserOrder entity, UserOrderViewCreate view);
+
+    UserOrder fromViewCreate(@MappingTarget UserOrder entity, UserOrderViewUpdate view);
 
 }

@@ -4,6 +4,7 @@ package backendspring.domain.userorder.controller;
 import backendspring.domain.userorder.model.entity.OrderStatus;
 import backendspring.domain.userorder.model.view.UserOrderViewCreate;
 import backendspring.domain.userorder.model.view.UserOrderViewRead;
+import backendspring.domain.userorder.model.view.UserOrderViewUpdate;
 import backendspring.domain.userorder.service.UserOrderService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -53,11 +54,17 @@ public class UserOrderController {
         return service.getOne(userId, id);
     }
 
+    @PatchMapping("/{userId}/order/{orderId}/{deliveryPointId}")
+    public UserOrderViewRead patchDeliveryPoint(@PathVariable Long userId, @PathVariable Long orderId, @PathVariable Long deliveryPointId) {
+        Long id = service.patchDeliveryPoint(orderId, deliveryPointId);
+        return service.getOne(userId, id);
+    }
+
     @PutMapping("/{userId}/{id}")
     public UserOrderViewRead update(
             @PathVariable Long userId,
             @PathVariable Long id,
-            @RequestBody UserOrderViewCreate view
+            @RequestBody UserOrderViewUpdate view
     ) {
         service.update(userId, id, view);
         return service.getOne(userId, id);

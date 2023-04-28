@@ -3,11 +3,14 @@ package backendspring.domain.userorder.service;
 import backendspring.domain.auth.model.entity.User;
 import backendspring.domain.auth.repository.UserRepository;
 import backendspring.domain.auth.service.UserService;
+import backendspring.domain.point.model.entity.DeliveryPoint;
+import backendspring.domain.point.service.DeliveryPointService;
 import backendspring.domain.userorder.model.entity.OrderStatus;
 import backendspring.domain.userorder.model.entity.UserOrder;
 import backendspring.domain.userorder.model.mapper.ProductMapper;
 import backendspring.domain.userorder.model.view.UserOrderViewCreate;
 import backendspring.domain.userorder.model.view.UserOrderViewRead;
+import backendspring.domain.userorder.model.view.UserOrderViewUpdate;
 import backendspring.domain.userorder.repository.ProductOrderRepository;
 import backendspring.domain.userorder.repository.UserOrderRepository;
 import lombok.AccessLevel;
@@ -34,6 +37,8 @@ public class UserOrderService {
     ProductOrderRepository productOrderRepository;
 
     UserService userService;
+
+    DeliveryPointService deliveryPointService;
 
     ProductMapper mapper = ProductMapper.INSTANCE;
     private final UserRepository userRepository;
@@ -77,9 +82,9 @@ public class UserOrderService {
         return entity.getId();
     }
 
-    public void update(Long userId, Long id, UserOrderViewCreate view) {
+    public void update(Long userId, Long id, UserOrderViewUpdate view) {
         var entity = getObject(id);
-        if (entity.getUser().getId().equals(userId))
+        if (!entity.getUser().getId().equals(userId))
             throw new RuntimeException("Ошибка!");
         mapper.fromViewCreate(entity, view);
         repository.save(entity);
@@ -99,12 +104,23 @@ public class UserOrderService {
     }
 
     public Long patchStatus(Long userId, Long orderId, OrderStatus orderStatus) {
+        UserOrder order = repository.findById(orderId).get();
         if (OrderStatus.DONE.equals(orderStatus)) {
             User user = userRepository.findById(userId).get();
-            UserOrder order = repository.findById(orderId).get();
-            user.getUserRoom().setBonusPoints(user.getUserRoom().getBonusPoints() + (int) (order.getSum() / 100));
             userRepository.save(user);
+            user.getUserRoom().setBonusPoints(user.getUserRoom().getBonusPoints() + (int) (order.getSum() / 100));
+            order.setReceiptDate(LocalDate.now());
         }
+        order.setStatus(orderStatus);
+        repository.save(order);
+        return 0L;
+    }
+
+    public Long patchDeliveryPoint(Long orderId, Long deliveryPointId) {
+        DeliveryPoint dp = deliveryPointService.getOne(deliveryPointId);
+        UserOrder order = repository.findById(orderId).get();
+        order.setDeliveryPoint(dp);
+        repository.save(order);
         return 0L;
     }
 }
