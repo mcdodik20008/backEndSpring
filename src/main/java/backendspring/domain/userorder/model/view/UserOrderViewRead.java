@@ -1,5 +1,6 @@
 package backendspring.domain.userorder.model.view;
 
+import backendspring.domain.auth.model.view.UserViewShort;
 import backendspring.domain.point.model.view.DeliveryPointViewRead;
 import backendspring.domain.userorder.model.entity.OrderStatus;
 import lombok.Getter;
@@ -12,6 +13,8 @@ import java.util.List;
 @Getter
 @Setter
 public class UserOrderViewRead {
+
+    private UserViewShort user;
 
     private Long id;
 
