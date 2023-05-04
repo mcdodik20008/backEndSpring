@@ -16,4 +16,6 @@ public class ProductViewCreate {
 
     private SubCategoryViewRead subCategory;
 
+    private String imageUrl;
+
 }

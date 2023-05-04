@@ -18,4 +18,6 @@ public class ProductViewRead {
 
     private SubCategoryViewRead subCategory;
 
+    private String imageUrl;
+
 }

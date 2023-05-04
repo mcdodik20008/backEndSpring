@@ -32,6 +32,9 @@ public class Product implements Serializable {
     @Column(name = "controlled")
     private Boolean controlled;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Min(0)
     @Column(name = "price")
     private Double price;
