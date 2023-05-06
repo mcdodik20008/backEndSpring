@@ -2,6 +2,7 @@ package backendspring.domain.product.controller;
 
 import backendspring.domain.product.model.view.ProductViewCreate;
 import backendspring.domain.product.model.view.ProductViewRead;
+import backendspring.domain.product.model.view.ProductViewUpdate;
 import backendspring.domain.product.service.ProductService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -45,10 +46,10 @@ public class ProductController {
         return service.getOne(id);
     }
 
-    @PutMapping("/{id}")
-    public ProductViewRead update(@PathVariable Long id, @RequestBody ProductViewCreate view) {
-        service.update(id, view);
-        return service.getOne(id);
+    @PutMapping("/{productId}")
+    public ProductViewRead update(@PathVariable Long productId, Long subCategoryId, @RequestBody ProductViewUpdate view) {
+        service.update(productId, subCategoryId, view);
+        return service.getOne(productId);
     }
 
     @DeleteMapping("/{id}")
