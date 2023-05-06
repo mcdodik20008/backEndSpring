@@ -47,8 +47,8 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    public ProductViewRead update(@PathVariable Long productId, Long subCategoryId, @RequestBody ProductViewUpdate view) {
-        service.update(productId, subCategoryId, view);
+    public ProductViewRead update(@PathVariable Long productId, @RequestBody ProductViewUpdate view) {
+        service.update(productId, view);
         return service.getOne(productId);
     }
 
