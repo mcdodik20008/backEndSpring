@@ -22,7 +22,7 @@ public class SubCategory implements Serializable {
     private String name;
 
     @NotNull
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "fk_subcategory_parent"))
     private Category parentCategory;
 
