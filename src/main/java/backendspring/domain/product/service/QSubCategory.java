@@ -12,6 +12,10 @@ import javax.annotation.processing.Generated;
 
 import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
+
+/**
+ * QSubCategory is a Querydsl query type for SubCategory
+ */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QSubCategory extends EntityPathBase<SubCategory> {
 
@@ -25,7 +29,7 @@ public class QSubCategory extends EntityPathBase<SubCategory> {
 
     public final StringPath name = createString("name");
 
-    public final backendspring.domain.product.service.QCategory parentCategory;
+    public final QCategory parentCategory;
 
     public QSubCategory(String variable) {
         this(SubCategory.class, forVariable(variable), INITS);
@@ -45,7 +49,7 @@ public class QSubCategory extends EntityPathBase<SubCategory> {
 
     public QSubCategory(Class<? extends SubCategory> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.parentCategory = inits.isInitialized("parentCategory") ? new backendspring.domain.product.service.QCategory(forProperty("parentCategory")) : null;
+        this.parentCategory = inits.isInitialized("parentCategory") ? new QCategory(forProperty("parentCategory")) : null;
     }
 
 }

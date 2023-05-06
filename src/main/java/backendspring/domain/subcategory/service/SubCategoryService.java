@@ -24,7 +24,6 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class SubCategoryService {
 
     SubCategoryRepository repository;
-
     SubCategoryMapper mapper = SubCategoryMapper.INSTANCE;
 
     public Page<SubCategoryViewRead> getSubCategories(Pageable pageable) {
@@ -41,8 +40,7 @@ public class SubCategoryService {
     }
 
     public void update(Long id, SubCategoryViewCreate view) {
-        var entity = getObject(id);
-        mapper.fromViewCreate(entity, view);
+        var entity = mapper.fromViewCreate(getObject(id), view);
         repository.save(entity);
     }
 

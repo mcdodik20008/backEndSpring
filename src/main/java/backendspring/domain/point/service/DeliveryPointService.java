@@ -23,7 +23,6 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class DeliveryPointService {
 
     DeliveryPointRepository repository;
-
     DeliveryPointMapper mapper = DeliveryPointMapper.INSTANCE;
 
     public Page<DeliveryPoint> getCategories(Pageable pageable) {
@@ -40,8 +39,7 @@ public class DeliveryPointService {
     }
 
     public void update(Long id, DeliveryPointViewCreate view) {
-        var entity = getObject(id);
-        mapper.fromViewCreate(entity, view);
+        var entity = mapper.fromViewCreate( getObject(id), view);
         repository.save(entity);
     }
 

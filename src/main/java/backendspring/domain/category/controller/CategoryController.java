@@ -24,7 +24,6 @@ public class CategoryController {
         return service.getCategories(pageable);
     }
 
-    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public CategoryViewRead getOne(@PathVariable Long id) {
         return service.getOne(id);

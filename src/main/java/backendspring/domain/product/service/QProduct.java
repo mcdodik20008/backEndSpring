@@ -9,6 +9,10 @@ import javax.annotation.processing.Generated;
 
 import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
+
+/**
+ * QProduct is a Querydsl query type for Product
+ */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QProduct extends EntityPathBase<Product> {
 
@@ -22,11 +26,13 @@ public class QProduct extends EntityPathBase<Product> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final StringPath imageUrl = createString("imageUrl");
+
     public final StringPath name = createString("name");
 
     public final NumberPath<Double> price = createNumber("price", Double.class);
 
-    public final backendspring.domain.product.service.QSubCategory subCategory;
+    public final QSubCategory subCategory;
 
     public QProduct(String variable) {
         this(Product.class, forVariable(variable), INITS);
@@ -46,7 +52,7 @@ public class QProduct extends EntityPathBase<Product> {
 
     public QProduct(Class<? extends Product> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.subCategory = inits.isInitialized("subCategory") ? new backendspring.domain.product.service.QSubCategory(forProperty("subCategory"), inits.get("subCategory")) : null;
+        this.subCategory = inits.isInitialized("subCategory") ? new QSubCategory(forProperty("subCategory"), inits.get("subCategory")) : null;
     }
 
 }

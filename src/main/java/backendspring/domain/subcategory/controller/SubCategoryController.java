@@ -20,7 +20,7 @@ public class SubCategoryController {
     SubCategoryService service;
 
     @GetMapping
-    public Page<SubCategoryViewRead> getPage(Pageable pageable) throws NoSuchFieldException {
+    public Page<SubCategoryViewRead> getPage(Pageable pageable) {
         return service.getSubCategories(pageable);
     }
 

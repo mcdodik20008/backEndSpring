@@ -21,7 +21,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -59,30 +58,22 @@ public class UserOrderService {
 
     public List<UserOrderViewRead> getListByDeliveryPointId(Long id) {
         var orders = repository.findByDeliveryPointId(id).stream().map(mapper::toViewRead).toList();
-        if (orders.isEmpty())
-            throw new ResponseStatusException(
-                    NOT_FOUND,
-                    "Не найдены заказы, доставленные в точку с идентификатором " + id);
-        else
+        if (!orders.isEmpty()) {
             return orders;
+        }
+        throw new ResponseStatusException(
+                NOT_FOUND,
+                "Не найдены заказы, доставленные в точку с идентификатором " + id);
     }
 
     public Long create(Long userId, UserOrderViewCreate view) {
-        var currentDate = LocalDate.now();
-
         var entity = mapper.fromViewCreate(view);
         entity.setProductOrder(productOrderRepository.saveAll(entity.getProductOrder()));
         productOrderRepository.flush();
-
         entity.setUser(userService.getObject(userId));
-        entity = repository.save(entity);
-
         entity.setStatus(OrderStatus.IN_PROGRESS);
-        entity.setOrderDateTime(LocalDateTime.now());
-        entity.setExpectedDate(currentDate.plusWeeks(1));
-        entity.setLastStorageDay(currentDate.plusMonths(1));
+        entity = repository.save(entity);
         repository.flush();
-
         return entity.getId();
     }
 
@@ -111,8 +102,9 @@ public class UserOrderService {
         UserOrder order = repository.findById(orderId).get();
         if (OrderStatus.DONE.equals(orderStatus)) {
             User user = userRepository.findById(userId).get();
-            userRepository.save(user);
             user.getUserRoom().setBonusPoints(user.getUserRoom().getBonusPoints() + (int) (order.getSum() / 100));
+            userRepository.save(user);
+            userRepository.flush();
             order.setReceiptDate(LocalDate.now());
         }
         order.setStatus(orderStatus);

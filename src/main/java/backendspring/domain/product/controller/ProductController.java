@@ -25,12 +25,12 @@ public class ProductController {
         return service.getProducts(name, pageable);
     }
 
-    @GetMapping("category/{categoryId}")
+    @GetMapping("/category/{categoryId}")
     public Page<ProductViewRead> getPageWithCategories(@PathVariable Long categoryId, Pageable pageable) {
         return service.getProductsByCategory(categoryId, pageable);
     }
 
-    @GetMapping("subcategories/{subcategoryId}")
+    @GetMapping("/subcategories/{subcategoryId}")
     public Page<ProductViewRead> getPageWithSubCategories(@PathVariable Long subcategoryId, Pageable pageable) {
         return service.getProductsBySubCategory(subcategoryId, pageable);
     }

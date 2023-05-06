@@ -53,4 +53,11 @@ public class UserOrder implements Serializable {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @PrePersist
+    private void prePersist(){
+        var currentDate = LocalDate.now();
+        this.setOrderDateTime(LocalDateTime.now());
+        this.setExpectedDate(currentDate.plusWeeks(1));
+        this.setLastStorageDay(currentDate.plusMonths(1));
+    }
 }

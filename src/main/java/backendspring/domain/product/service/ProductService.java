@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -46,10 +45,6 @@ public class ProductService {
         return mapper.toViewRead(getObject(id));
     }
 
-    public List<ProductViewRead> getList(List<Long> ids) {
-        return repository.findByIdIn(ids).stream().map(mapper::toViewRead).toList();
-    }
-
     public Long create(ProductViewCreate view) {
         var entity = mapper.fromViewCreate(view);
         return repository.save(entity).getId();
@@ -57,9 +52,8 @@ public class ProductService {
 
     public void update(Long productId, ProductViewUpdate view) {
         var subId = view.getSubCategoryId().getId();
-        SubCategory subCat = subCategoryRepository.getOne(subId);
+        SubCategory subCat = subCategoryRepository.findById(subId).orElseThrow();
         var entity = mapper.fromViewUpdate(getObject(productId), view);
-
         entity.setSubCategory(subCat);
         repository.save(entity);
     }

@@ -41,8 +41,7 @@ public class CategoryService {
     }
 
     public void update(Long id, CategoryViewCreate view) {
-        var entity = getObject(id);
-        mapper.fromViewCreate(entity, view);
+        var entity = mapper.fromViewCreate(getObject(id), view);
         repository.save(entity);
     }
 

@@ -1,6 +1,6 @@
 package backendspring.domain.product.model.view;
 
-import backendspring.domain.subcategory.model.view.SubCategoryViewUpdate;
+import backendspring.infrasructure.view.ReferenceView;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +14,7 @@ public class ProductViewCreate {
 
     private Double price;
 
-    private SubCategoryViewUpdate subCategory;
+    private ReferenceView subCategory;
 
     private String imageUrl;
 

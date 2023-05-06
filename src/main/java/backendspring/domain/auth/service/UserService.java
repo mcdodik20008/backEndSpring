@@ -36,8 +36,7 @@ public class UserService {
     }
 
     public UserViewRead update(Long id, UserViewUpdate view) {
-        var entity = getObject(id);
-        mapper.fromViewUpdate(entity, view);
+        var entity = mapper.fromViewUpdate(getObject(id), view);
         repository.save(entity);
         return mapper.toViewRead(entity);
     }

@@ -32,7 +32,7 @@ public class UserOrderController {
         return service.getLastOrder(userId);
     }
 
-    @GetMapping("/{userId}/{id}")
+    @GetMapping("/{userId}/{id}") // тут лучше было бы как-то разделить {id}/user/{userId}
     public UserOrderViewRead getOne(@PathVariable Long userId, @PathVariable Long id) {
         return service.getOne(userId, id);
     }
@@ -54,13 +54,13 @@ public class UserOrderController {
         return service.getOne(userId, id);
     }
 
-    @PatchMapping("/{userId}/order/{orderId}/{deliveryPointId}")
+    @PatchMapping("/{userId}/order/{orderId}/{deliveryPointId}") // тут тоже нет разделения id
     public UserOrderViewRead patchDeliveryPoint(@PathVariable Long userId, @PathVariable Long orderId, @PathVariable Long deliveryPointId) {
         Long id = service.patchDeliveryPoint(orderId, deliveryPointId);
         return service.getOne(userId, id);
     }
 
-    @PutMapping("/{userId}/{id}")
+    @PutMapping("/{userId}/{id}") // тут тоже нет разделения id
     public UserOrderViewRead update(
             @PathVariable Long userId,
             @PathVariable Long id,
@@ -70,7 +70,7 @@ public class UserOrderController {
         return service.getOne(userId, id);
     }
 
-    @DeleteMapping("/{userId}/{id}")
+    @DeleteMapping("/{userId}/{id}") // и тут нет разделения id словом
     public void deleteById(@PathVariable Long userId, @PathVariable Long id) {
         service.deleteById(userId, id);
     }
