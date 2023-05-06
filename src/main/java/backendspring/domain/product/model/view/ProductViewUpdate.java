@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductViewCreate {
+public class ProductViewUpdate {
 
     private String name;
 
@@ -14,7 +14,7 @@ public class ProductViewCreate {
 
     private Double price;
 
-    private SubCategoryViewUpdate subCategory;
+    private SubCategoryViewUpdate subCategoryId;
 
     private String imageUrl;
 

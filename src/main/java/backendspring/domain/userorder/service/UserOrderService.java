@@ -69,16 +69,20 @@ public class UserOrderService {
 
     public Long create(Long userId, UserOrderViewCreate view) {
         var currentDate = LocalDate.now();
+
         var entity = mapper.fromViewCreate(view);
         entity.setProductOrder(productOrderRepository.saveAll(entity.getProductOrder()));
         productOrderRepository.flush();
+
         entity.setUser(userService.getObject(userId));
         entity = repository.save(entity);
+
         entity.setStatus(OrderStatus.IN_PROGRESS);
         entity.setOrderDateTime(LocalDateTime.now());
         entity.setExpectedDate(currentDate.plusWeeks(1));
         entity.setLastStorageDay(currentDate.plusMonths(1));
         repository.flush();
+
         return entity.getId();
     }
 

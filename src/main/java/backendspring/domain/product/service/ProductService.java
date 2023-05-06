@@ -4,7 +4,10 @@ import backendspring.domain.product.model.entity.Product;
 import backendspring.domain.product.model.mapper.ProductMapper;
 import backendspring.domain.product.model.view.ProductViewCreate;
 import backendspring.domain.product.model.view.ProductViewRead;
+import backendspring.domain.product.model.view.ProductViewUpdate;
 import backendspring.domain.product.repository.ProductRepository;
+import backendspring.domain.subcategory.model.entity.SubCategory;
+import backendspring.domain.subcategory.repository.SubCategoryRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +29,8 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class ProductService {
 
     ProductRepository repository;
+
+    SubCategoryRepository subCategoryRepository;
 
     ProductMapper mapper = ProductMapper.INSTANCE;
 
@@ -50,9 +55,12 @@ public class ProductService {
         return repository.save(entity).getId();
     }
 
-    public void update(Long id, ProductViewCreate view) {
-        var entity = getObject(id);
-        mapper.fromViewCreate(entity, view);
+    public void update(Long productId, ProductViewUpdate view) {
+        var subId = view.getSubCategoryId().getId();
+        SubCategory subCat = subCategoryRepository.getOne(subId);
+        var entity = mapper.fromViewUpdate(getObject(productId), view);
+
+        entity.setSubCategory(subCat);
         repository.save(entity);
     }
 

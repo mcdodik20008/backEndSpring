@@ -3,6 +3,7 @@ package backendspring.domain.subcategory.model.mapper;
 import backendspring.domain.subcategory.model.entity.SubCategory;
 import backendspring.domain.subcategory.model.view.SubCategoryViewCreate;
 import backendspring.domain.subcategory.model.view.SubCategoryViewRead;
+import backendspring.domain.subcategory.model.view.SubCategoryViewUpdate;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
@@ -13,6 +14,8 @@ public interface SubCategoryMapper {
     SubCategoryMapper INSTANCE = Mappers.getMapper(SubCategoryMapper.class);
 
     SubCategoryViewRead toViewRead(SubCategory entity);
+
+    SubCategoryViewUpdate toViewUpdate(SubCategory entity);
 
     SubCategory fromViewCreate(SubCategoryViewCreate view);
 
