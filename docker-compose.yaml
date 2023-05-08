@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+  myapp:
+    image: openjdk:17
+    container_name: "myapp"
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8888:8888"
+    volumes:
+      - "./target/apteka-1.0.jar:/app.jar"
+    entrypoint: [ "sh", "-c", "java  -jar /app.jar" ]
+  db:
+    image: postgres:14.1-alpine
+    container_name: "db"
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
