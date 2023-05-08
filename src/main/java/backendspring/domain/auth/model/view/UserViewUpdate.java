@@ -14,8 +14,8 @@ public class UserViewUpdate {
 
     private String lastName;
 
-    private DeliveryPointViewRead deliveryPoint;
-
     private String phoneNumber;
+
+    private DeliveryPointViewRead deliveryPoint;
 
 }

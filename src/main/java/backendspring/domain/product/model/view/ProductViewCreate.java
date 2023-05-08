@@ -10,12 +10,11 @@ public class ProductViewCreate {
 
     private String name;
 
-    private Boolean controlled;
-
-    private Double price;
-
     private ReferenceView subCategory;
+
+    private Boolean controlled;
 
     private String imageUrl;
 
+    private Double price;
 }

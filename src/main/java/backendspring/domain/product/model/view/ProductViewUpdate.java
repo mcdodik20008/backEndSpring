@@ -10,12 +10,12 @@ public class ProductViewUpdate {
 
     private String name;
 
+    private ReferenceView subCategory;
+
     private Boolean controlled;
 
-    private Double price;
-
-    private ReferenceView subCategoryId;
-
     private String imageUrl;
+
+    private Double price;
 
 }
