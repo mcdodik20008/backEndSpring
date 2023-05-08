@@ -9,7 +9,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface ProductMapper {
+public interface ProductMapper extends SubCategoryMap {
 
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
