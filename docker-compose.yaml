@@ -1,9 +1,9 @@
 version: "3.3"
 
 services:
-  myapp:
+  pets-api:
     image: openjdk:17
-    container_name: "myapp"
+    container_name: "pets-api"
     restart: always
     depends_on:
       - db
