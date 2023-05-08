@@ -51,7 +51,7 @@ public class ProductService {
     }
 
     public void update(Long productId, ProductViewUpdate view) {
-        var subId = view.getSubCategoryId().getId();
+        var subId = view.getSubCategory().getId();
         SubCategory subCat = subCategoryRepository.findById(subId).orElseThrow();
         var entity = mapper.fromViewUpdate(getObject(productId), view);
         entity.setSubCategory(subCat);
