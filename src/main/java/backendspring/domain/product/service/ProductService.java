@@ -37,7 +37,7 @@ public class ProductService {
         if (name == null || name.equals("null")) {
             return repository.findAll(pageable).map(mapper::toViewRead);
         }
-        BooleanExpression exp = QProduct.product.name.like(name);
+        BooleanExpression exp = QProduct.product.name.startsWith(name);
         return repository.findAll(exp, pageable).map(mapper::toViewRead);
     }
 
