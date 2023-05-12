@@ -1,5 +1,6 @@
 package backendspring.domain.userorder.model.view;
 
+import backendspring.domain.auth.model.view.UserViewUpdate;
 import backendspring.domain.point.model.view.DeliveryPointViewRead;
 import backendspring.domain.userorder.model.entity.OrderStatus;
 import backendspring.infrasructure.view.ReferenceView;
@@ -14,7 +15,7 @@ import java.util.List;
 @Setter
 public class UserOrderViewRead {
 
-    private ReferenceView user;
+    private UserViewUpdate user;
 
     private Long id;
 
