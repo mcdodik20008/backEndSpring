@@ -33,12 +33,8 @@ public class ProductService {
 
     ProductMapper mapper = ProductMapper.INSTANCE;
 
-    public Page<ProductViewRead> getProducts(String name, Pageable pageable) {
-        if (name == null || name.equals("null")) {
-            return repository.findAll(pageable).map(mapper::toViewRead);
-        }
-        BooleanExpression exp = QProduct.product.name.startsWith(name);
-        return repository.findAll(exp, pageable).map(mapper::toViewRead);
+    public Page<ProductViewRead> getProducts(ProductSearchFilter searchFilter, Pageable pageable) {
+        return repository.findAll(searchFilter.getPredicate(), pageable).map(mapper::toViewRead);
     }
 
     public ProductViewRead getOne(Long id) {
@@ -68,19 +64,26 @@ public class ProductService {
                         "Не найден продукт с идентификатором " + id));
     }
 
-    public Page<ProductViewRead> getProductsByCategory(Long categoryId, Pageable pageable) {
-        if (categoryId == null) {
-            return repository.findAll(pageable).map(mapper::toViewRead);
-        }
-        BooleanExpression exp = QProduct.product.subCategory.parentCategory.id.eq(categoryId);
+    public Page<ProductViewRead> getProductsByCategory(
+            Long categoryId,
+            ProductSearchFilter searchFilter,
+            Pageable pageable)
+    {
+        BooleanExpression exp = searchFilter.getPredicate();
+        if (categoryId != null)
+            exp = exp.and(QProduct.product.subCategory.parentCategory.id.eq(categoryId));
         return repository.findAll(exp, pageable).map(mapper::toViewRead);
     }
 
-    public Page<ProductViewRead> getProductsBySubCategory(Long subcategoryId, Pageable pageable) {
-        if (subcategoryId == null) {
-            return repository.findAll(pageable).map(mapper::toViewRead);
-        }
-        BooleanExpression exp = QProduct.product.subCategory.id.eq(subcategoryId);
+    public Page<ProductViewRead> getProductsBySubCategory(
+            Long subcategoryId,
+            ProductSearchFilter searchFilter,
+            Pageable pageable)
+    {
+        BooleanExpression exp = searchFilter.getPredicate();
+        if (subcategoryId != null)
+            exp = exp.and(QProduct.product.subCategory.id.eq(subcategoryId));
+
         return repository.findAll(exp, pageable).map(mapper::toViewRead);
     }
 }

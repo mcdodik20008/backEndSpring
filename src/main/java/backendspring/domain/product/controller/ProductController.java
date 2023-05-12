@@ -3,6 +3,7 @@ package backendspring.domain.product.controller;
 import backendspring.domain.product.model.view.ProductViewCreate;
 import backendspring.domain.product.model.view.ProductViewRead;
 import backendspring.domain.product.model.view.ProductViewUpdate;
+import backendspring.domain.product.service.ProductSearchFilter;
 import backendspring.domain.product.service.ProductService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -21,18 +22,27 @@ public class ProductController {
     ProductService service;
 
     @GetMapping
-    public Page<ProductViewRead> getPage(@RequestParam(required = false) String name, Pageable pageable) {
-        return service.getProducts(name, pageable);
+    public Page<ProductViewRead> getPage(ProductSearchFilter searchFilter, Pageable pageable)
+    {
+        return service.getProducts(searchFilter, pageable);
     }
 
     @GetMapping("/category/{categoryId}")
-    public Page<ProductViewRead> getPageWithCategories(@PathVariable Long categoryId, Pageable pageable) {
-        return service.getProductsByCategory(categoryId, pageable);
+    public Page<ProductViewRead> getPageWithCategories(
+            @PathVariable Long categoryId,
+            ProductSearchFilter searchFilter,
+            Pageable pageable)
+    {
+        return service.getProductsByCategory(categoryId, searchFilter, pageable);
     }
 
     @GetMapping("/subcategories/{subcategoryId}")
-    public Page<ProductViewRead> getPageWithSubCategories(@PathVariable Long subcategoryId, Pageable pageable) {
-        return service.getProductsBySubCategory(subcategoryId, pageable);
+    public Page<ProductViewRead> getPageWithSubCategories(
+            @PathVariable Long subcategoryId,
+            ProductSearchFilter searchFilter,
+            Pageable pageable)
+    {
+        return service.getProductsBySubCategory(subcategoryId, searchFilter, pageable);
     }
 
     @GetMapping("/{id}")

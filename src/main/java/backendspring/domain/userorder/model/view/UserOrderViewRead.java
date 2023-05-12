@@ -3,7 +3,6 @@ package backendspring.domain.userorder.model.view;
 import backendspring.domain.auth.model.view.UserViewUpdate;
 import backendspring.domain.point.model.view.DeliveryPointViewRead;
 import backendspring.domain.userorder.model.entity.OrderStatus;
-import backendspring.infrasructure.view.ReferenceView;
 import lombok.Getter;
 import lombok.Setter;
 
