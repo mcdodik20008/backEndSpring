@@ -15,6 +15,8 @@ public class ProductSearchFilter {
     Double minPrice;
     Double maxPrice;
     Boolean controlled;
+    Long categoryId;
+    Long subCategoryId;
 
     @JsonIgnore
     public BooleanExpression getPredicate() {
@@ -28,6 +30,10 @@ public class ProductSearchFilter {
             exp = exp.and(qProduct.price.goe(this.minPrice));
         if (this.maxPrice != null)
             exp = exp.and(qProduct.price.loe(this.maxPrice));
+        if (this.categoryId != null)
+            exp = exp.and(qProduct.subCategory.parentCategory.id.eq(categoryId));
+        if (this.subCategoryId != null)
+            exp = exp.and(qProduct.subCategory.id.eq(categoryId));
         return exp;
     }
 

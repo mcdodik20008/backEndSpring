@@ -64,26 +64,4 @@ public class ProductService {
                         "Не найден продукт с идентификатором " + id));
     }
 
-    public Page<ProductViewRead> getProductsByCategory(
-            Long categoryId,
-            ProductSearchFilter searchFilter,
-            Pageable pageable)
-    {
-        BooleanExpression exp = searchFilter.getPredicate();
-        if (categoryId != null)
-            exp = exp.and(QProduct.product.subCategory.parentCategory.id.eq(categoryId));
-        return repository.findAll(exp, pageable).map(mapper::toViewRead);
-    }
-
-    public Page<ProductViewRead> getProductsBySubCategory(
-            Long subcategoryId,
-            ProductSearchFilter searchFilter,
-            Pageable pageable)
-    {
-        BooleanExpression exp = searchFilter.getPredicate();
-        if (subcategoryId != null)
-            exp = exp.and(QProduct.product.subCategory.id.eq(subcategoryId));
-
-        return repository.findAll(exp, pageable).map(mapper::toViewRead);
-    }
 }

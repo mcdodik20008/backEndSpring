@@ -27,24 +27,6 @@ public class ProductController {
         return service.getProducts(searchFilter, pageable);
     }
 
-    @GetMapping("/category/{categoryId}")
-    public Page<ProductViewRead> getPageWithCategories(
-            @PathVariable Long categoryId,
-            ProductSearchFilter searchFilter,
-            Pageable pageable)
-    {
-        return service.getProductsByCategory(categoryId, searchFilter, pageable);
-    }
-
-    @GetMapping("/subcategories/{subcategoryId}")
-    public Page<ProductViewRead> getPageWithSubCategories(
-            @PathVariable Long subcategoryId,
-            ProductSearchFilter searchFilter,
-            Pageable pageable)
-    {
-        return service.getProductsBySubCategory(subcategoryId, searchFilter, pageable);
-    }
-
     @GetMapping("/{id}")
     public ProductViewRead getOne(@PathVariable Long id) {
         return service.getOne(id);
