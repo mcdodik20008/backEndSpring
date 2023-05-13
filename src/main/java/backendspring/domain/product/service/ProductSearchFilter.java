@@ -30,10 +30,10 @@ public class ProductSearchFilter {
             exp = exp.and(qProduct.price.goe(this.minPrice));
         if (this.maxPrice != null)
             exp = exp.and(qProduct.price.loe(this.maxPrice));
-        if (this.categoryId != null)
+        if (this.categoryId != null && this.subCategoryId == null)
             exp = exp.and(qProduct.subCategory.parentCategory.id.eq(categoryId));
-        if (this.subCategoryId != null)
-            exp = exp.and(qProduct.subCategory.id.eq(categoryId));
+        if (this.subCategoryId != null && this.categoryId == null)
+            exp = exp.and(qProduct.subCategory.id.eq(subCategoryId));
         return exp;
     }
 
