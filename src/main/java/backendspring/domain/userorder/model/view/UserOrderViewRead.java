@@ -1,6 +1,6 @@
 package backendspring.domain.userorder.model.view;
 
-import backendspring.domain.auth.model.view.UserViewUpdate;
+import backendspring.domain.auth.model.view.UserViewRead;
 import backendspring.domain.point.model.view.DeliveryPointViewRead;
 import backendspring.domain.userorder.model.entity.OrderStatus;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 public class UserOrderViewRead {
 
-    private UserViewUpdate user;
+    private UserViewRead user;
 
     private Long id;
 
