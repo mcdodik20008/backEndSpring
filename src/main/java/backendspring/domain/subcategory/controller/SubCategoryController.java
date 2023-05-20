@@ -24,6 +24,11 @@ public class SubCategoryController {
         return service.getSubCategories(pageable);
     }
 
+    @GetMapping("/parentCategory/{id}")
+    public Page<SubCategoryViewRead> getPage(Pageable pageable, @PathVariable Long id) {
+        return service.getSubCategories(pageable, id);
+    }
+
     @GetMapping("/{id}")
     public SubCategoryViewRead getOne(@PathVariable Long id) {
         return service.getOne(id);

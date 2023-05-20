@@ -1,10 +1,12 @@
 package backendspring.domain.subcategory.service;
 
+import backendspring.domain.product.service.QSubCategory;
 import backendspring.domain.subcategory.model.entity.SubCategory;
 import backendspring.domain.subcategory.model.mapper.SubCategoryMapper;
 import backendspring.domain.subcategory.model.view.SubCategoryViewCreate;
 import backendspring.domain.subcategory.model.view.SubCategoryViewRead;
 import backendspring.domain.subcategory.repository.SubCategoryRepository;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,6 +30,12 @@ public class SubCategoryService {
 
     public Page<SubCategoryViewRead> getSubCategories(Pageable pageable) {
         return repository.findAll(pageable).map(mapper::toViewRead);
+    }
+
+    public Page<SubCategoryViewRead> getSubCategories(Pageable pageable, Long id) {
+        QSubCategory qSubCategory = QSubCategory.subCategory;
+        BooleanExpression exp = qSubCategory.parentCategory.id.eq(id);
+        return repository.findAll(exp, pageable).map(mapper::toViewRead);
     }
 
     public SubCategoryViewRead getOne(Long id) {

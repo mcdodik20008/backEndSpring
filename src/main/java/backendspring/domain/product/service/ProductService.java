@@ -8,7 +8,6 @@ import backendspring.domain.product.model.view.ProductViewUpdate;
 import backendspring.domain.product.repository.ProductRepository;
 import backendspring.domain.subcategory.model.entity.SubCategory;
 import backendspring.domain.subcategory.repository.SubCategoryRepository;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
