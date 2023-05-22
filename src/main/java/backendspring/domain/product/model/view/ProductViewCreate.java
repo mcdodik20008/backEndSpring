@@ -17,4 +17,7 @@ public class ProductViewCreate {
     private String imageUrl;
 
     private Double price;
+
+    private String description;
+
 }

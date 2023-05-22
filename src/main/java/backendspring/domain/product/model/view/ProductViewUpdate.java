@@ -18,4 +18,6 @@ public class ProductViewUpdate {
 
     private Double price;
 
+    private String description;
+
 }

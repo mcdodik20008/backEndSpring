@@ -20,4 +20,6 @@ public class ProductViewRead {
 
     private Double price;
 
+    private String description;
+
 }

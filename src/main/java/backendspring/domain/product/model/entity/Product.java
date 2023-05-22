@@ -35,6 +35,9 @@ public class Product implements Serializable {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
     @Min(0)
     @Column(name = "price")
     private Double price;
