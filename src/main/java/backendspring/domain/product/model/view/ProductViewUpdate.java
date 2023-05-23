@@ -20,4 +20,6 @@ public class ProductViewUpdate {
 
     private String description;
 
+    private Boolean isAvailable;
+
 }

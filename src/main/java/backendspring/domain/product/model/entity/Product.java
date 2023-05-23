@@ -42,6 +42,9 @@ public class Product implements Serializable {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "is_available")
+    private Boolean isAvailable;
+
     @PrePersist
     @PreUpdate
     public void init()

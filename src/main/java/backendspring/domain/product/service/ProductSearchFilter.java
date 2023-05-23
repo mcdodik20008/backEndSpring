@@ -17,6 +17,7 @@ public class ProductSearchFilter {
     Boolean controlled;
     Long categoryId;
     Long subCategoryId;
+    Boolean isAvailable;
 
     @JsonIgnore
     public BooleanExpression getPredicate() {
@@ -34,6 +35,8 @@ public class ProductSearchFilter {
             exp = exp.and(qProduct.subCategory.parentCategory.id.eq(categoryId));
         if (this.subCategoryId != null && this.categoryId == null)
             exp = exp.and(qProduct.subCategory.id.eq(subCategoryId));
+        if (this.isAvailable != null)
+            exp = exp.and(qProduct.isAvailable.eq(isAvailable));
         return exp;
     }
 

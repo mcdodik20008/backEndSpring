@@ -22,4 +22,6 @@ public class ProductViewRead {
 
     private String description;
 
+    private Boolean isAvailable;
+
 }
