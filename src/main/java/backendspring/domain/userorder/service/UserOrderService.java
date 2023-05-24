@@ -66,11 +66,16 @@ public class UserOrderService {
                 "Не найдены заказы, доставленные в точку с идентификатором " + id);
     }
 
-    public Long create(Long userId, UserOrderViewCreate view) {
+    public Long create(Long userId, UserOrderViewCreate view, Integer remainingBonusPoints) {
+        var user = userService.getObject(userId);
+        user.getUserRoom().setBonusPoints(remainingBonusPoints);
+        userRepository.save(user);
+
         var entity = mapper.fromViewCreate(view);
         entity.setProductOrder(productOrderRepository.saveAll(entity.getProductOrder()));
         productOrderRepository.flush();
-        entity.setUser(userService.getObject(userId));
+
+        entity.setUser(user);
         entity.setStatus(OrderStatus.IN_PROGRESS);
         entity = repository.save(entity);
         repository.flush();

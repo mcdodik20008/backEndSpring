@@ -4,7 +4,6 @@ import backendspring.domain.auth.model.entity.User;
 import backendspring.domain.point.model.entity.DeliveryPoint;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -55,7 +54,7 @@ public class UserOrder implements Serializable {
     private OrderStatus status;
 
     @PrePersist
-    private void prePersist(){
+    private void prePersist() {
         var currentDate = LocalDate.now();
         this.setOrderDateTime(LocalDateTime.now());
         this.setExpectedDate(currentDate.plusWeeks(1));

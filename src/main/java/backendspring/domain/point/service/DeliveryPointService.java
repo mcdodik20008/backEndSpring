@@ -39,7 +39,7 @@ public class DeliveryPointService {
     }
 
     public void update(Long id, DeliveryPointViewCreate view) {
-        var entity = mapper.fromViewCreate( getObject(id), view);
+        var entity = mapper.fromViewCreate(getObject(id), view);
         repository.save(entity);
     }
 

@@ -47,8 +47,7 @@ public class Product implements Serializable {
 
     @PrePersist
     @PreUpdate
-    public void init()
-    {
+    public void init() {
         BigDecimal bdPrice = BigDecimal.valueOf(price).setScale(2, RoundingMode.HALF_UP);
         price = bdPrice.doubleValue();
     }

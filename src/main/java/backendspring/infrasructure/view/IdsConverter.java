@@ -22,7 +22,7 @@ public class IdsConverter implements AttributeConverter<Set<Long>, String> {
     public Set<Long> convertToEntityAttribute(String s) {
         if (s == null || s.isBlank())
             return Set.of();
-       return Arrays.stream(s.split(",")).map(Long::valueOf).collect(Collectors.toSet());
+        return Arrays.stream(s.split(",")).map(Long::valueOf).collect(Collectors.toSet());
     }
 
 }

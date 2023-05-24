@@ -22,8 +22,7 @@ public class ProductController {
     ProductService service;
 
     @GetMapping
-    public Page<ProductViewRead> getPage(ProductSearchFilter searchFilter, Pageable pageable)
-    {
+    public Page<ProductViewRead> getPage(ProductSearchFilter searchFilter, Pageable pageable) {
         return service.getProducts(searchFilter, pageable);
     }
 
