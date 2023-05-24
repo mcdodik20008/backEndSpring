@@ -42,7 +42,8 @@ public class UserOrder implements Serializable {
     @JoinColumn(name = "user_order_id")
     private List<ProductOrder> productOrder;
 
-    @Formula("(select SUM(po.count_product * p.price) from user_order uo left join product_order po on uo.id = po.user_order_id left join product p on p.id = po.product_id where uo.id = id )")
+    //@Formula("(select SUM(po.count_product * p.price) from user_order uo left join product_order po on uo.id = po.user_order_id left join product p on p.id = po.product_id where uo.id = id )")
+    @Column(name = "user_order_sum")
     private Double sum;
 
     @ManyToOne

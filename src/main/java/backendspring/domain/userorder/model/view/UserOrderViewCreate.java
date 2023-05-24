@@ -10,6 +10,10 @@ import java.util.List;
 @Setter
 public class UserOrderViewCreate {
 
+    private Double currentBonusPoints;
+
+    private Double sum;
+
     private List<ProductOrderViewCreate> productOrder;
 
     private DeliveryPointViewRead deliveryPoint;
