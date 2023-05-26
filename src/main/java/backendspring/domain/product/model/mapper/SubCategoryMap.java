@@ -5,7 +5,7 @@ import backendspring.infrasructure.view.ReferenceView;
 
 public interface SubCategoryMap {
 
-    default SubCategory toSubCategory(ReferenceView view){
+    default SubCategory toSubCategory(ReferenceView view) {
         SubCategory entity = new SubCategory();
         entity.setId(view.getId());
         return entity;

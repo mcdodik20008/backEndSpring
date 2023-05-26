@@ -43,8 +43,12 @@ public class UserOrderController {
     }
 
     @PostMapping("/{userId}")
-    public UserOrderViewRead create(@PathVariable Long userId, @RequestBody UserOrderViewCreate view) {
-        Long id = service.create(userId, view);
+    public UserOrderViewRead create(
+            @PathVariable Long userId,
+            @RequestBody UserOrderViewCreate view,
+            Integer remainingBonusPoints
+    ) {
+        Long id = service.create(userId, view, remainingBonusPoints);
         return service.getOne(userId, id);
     }
 

@@ -4,7 +4,6 @@ import backendspring.domain.auth.model.entity.User;
 import backendspring.domain.point.model.entity.DeliveryPoint;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -42,7 +41,8 @@ public class UserOrder implements Serializable {
     @JoinColumn(name = "user_order_id")
     private List<ProductOrder> productOrder;
 
-    @Formula("(select SUM(po.count_product * p.price) from user_order uo left join product_order po on uo.id = po.user_order_id left join product p on p.id = po.product_id where uo.id = id )")
+    //@Formula("(select SUM(po.count_product * p.price) from user_order uo left join product_order po on uo.id = po.user_order_id left join product p on p.id = po.product_id where uo.id = id )")
+    @Column(name = "user_order_sum")
     private Double sum;
 
     @ManyToOne
@@ -54,7 +54,7 @@ public class UserOrder implements Serializable {
     private OrderStatus status;
 
     @PrePersist
-    private void prePersist(){
+    private void prePersist() {
         var currentDate = LocalDate.now();
         this.setOrderDateTime(LocalDateTime.now());
         this.setExpectedDate(currentDate.plusWeeks(1));

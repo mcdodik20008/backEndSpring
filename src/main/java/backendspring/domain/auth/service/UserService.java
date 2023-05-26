@@ -22,7 +22,7 @@ public class UserService {
     private final UserMapper mapper = UserMapper.INSTANCE;
     private final UserRepository repository;
 
-    public UserViewRead login(String login, String password){
+    public UserViewRead login(String login, String password) {
         User user = repository.findByLogin(login).orElseThrow();
         if (!user.getPassword().equals(password))
             throw new RuntimeException("Не верный логин или пароль");
@@ -30,7 +30,7 @@ public class UserService {
         return mapper.toViewRead(user);
     }
 
-    public Boolean logout(){
+    public Boolean logout() {
         CURRENTUSER = null;
         return true;
     }
@@ -51,7 +51,7 @@ public class UserService {
         return mapper.toViewRead(getObject(userId));
     }
 
-    public Boolean registration(UserViewCreate view)  {
+    public Boolean registration(UserViewCreate view) {
         var entity = mapper.fromViewUpdate(view);
         repository.save(entity);
         return true;
