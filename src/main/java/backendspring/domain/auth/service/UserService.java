@@ -1,7 +1,9 @@
 package backendspring.domain.auth.service;
 
 import backendspring.domain.auth.model.entity.User;
+import backendspring.domain.auth.model.entity.UserRoom;
 import backendspring.domain.auth.model.mapper.UserMapper;
+import backendspring.domain.auth.model.mapper.UserRoomMapper;
 import backendspring.domain.auth.model.view.UserViewCreate;
 import backendspring.domain.auth.model.view.UserViewRead;
 import backendspring.domain.auth.model.view.UserViewUpdate;
@@ -21,6 +23,8 @@ public class UserService {
     public static User CURRENTUSER = null;
     private final UserMapper mapper = UserMapper.INSTANCE;
     private final UserRepository repository;
+
+    private final UserRoomMapper userRoomMapper = UserRoomMapper.INSTANCE;
 
     public UserViewRead login(String login, String password) {
         User user = repository.findByLogin(login).orElseThrow();
@@ -53,6 +57,9 @@ public class UserService {
 
     public Boolean registration(UserViewCreate view) {
         var entity = mapper.fromViewCreate(view);
+        var userRoom = new UserRoom();
+        userRoom.setBonusPoints(0);
+        entity.setUserRoom(userRoom);
         repository.save(entity);
         return true;
     }
