@@ -60,6 +60,7 @@ public class UserService {
         var userRoom = new UserRoom();
         userRoom.setBonusPoints(0);
         entity.setUserRoom(userRoom);
+        //entity.setDeliveryPoint();
         repository.save(entity);
         return true;
     }

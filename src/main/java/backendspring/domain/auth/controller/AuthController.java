@@ -31,7 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public Boolean registration(UserViewCreate user) {
+    public Boolean registration(@RequestBody UserViewCreate user) {
         return service.registration(user);
     }
 
