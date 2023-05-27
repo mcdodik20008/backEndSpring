@@ -24,7 +24,7 @@ public class ProductSearchFilter {
         QProduct qProduct = QProduct.product;
         BooleanExpression exp = qProduct.id.isNotNull();
         if (this.name != null)
-            exp = qProduct.name.likeIgnoreCase(this.name);
+            exp = qProduct.name.startsWithIgnoreCase(this.name);
         if (this.controlled != null)
             exp = exp.and(qProduct.controlled.eq(this.controlled));
         if (this.minPrice != null)
