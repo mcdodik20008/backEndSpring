@@ -15,6 +15,8 @@ public interface UserMapper {
 
     UserViewRead toViewRead(User entity);
 
+    User fromViewCreate(UserViewCreate view);
+
     User fromViewUpdate(@MappingTarget User entity, UserViewUpdate view);
 
     User fromViewUpdate(UserViewCreate view);
