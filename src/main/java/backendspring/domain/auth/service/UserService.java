@@ -52,7 +52,7 @@ public class UserService {
     }
 
     public Boolean registration(UserViewCreate view) {
-        var entity = mapper.fromViewUpdate(view);
+        var entity = mapper.fromViewCreate(view);
         repository.save(entity);
         return true;
     }
