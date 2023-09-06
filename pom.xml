@@ -93,7 +93,6 @@
             <artifactId>reflections</artifactId>
             <version>0.10.2</version>
         </dependency>
-
     </dependencies>
 
     <build>

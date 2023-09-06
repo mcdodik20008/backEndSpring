@@ -1,4 +1,4 @@
-package backendspring.domain.category.model.entity;
+package backendspring.domain.test.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,8 +8,8 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@Entity(name = "category")
-public class Category implements Serializable {
+@Entity(name = "test")
+public class Test implements Serializable {
 
     @Id
     @Column(name = "id")

@@ -5,9 +5,7 @@ import backendspring.domain.category.model.mapper.CategoryMapper;
 import backendspring.domain.category.model.view.CategoryViewCreate;
 import backendspring.domain.category.model.view.CategoryViewRead;
 import backendspring.domain.category.repository.CategoryRepository;
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,15 +18,15 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 @Transactional
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CategoryService {
 
-    CategoryRepository repository;
+    private final CategoryRepository repository;
 
-    CategoryMapper mapper = CategoryMapper.INSTANCE;
+    private final CategoryMapper mapper;
 
-    public Page<CategoryViewRead> getCategories(Pageable pageable) {
-        return repository.findAll(pageable).map(mapper::toViewRead);
+    public Page<CategoryViewRead> getCategories(Pageable pageable) throws Exception {
+        CategoryMapper instance = CategoryMapper.INSTANCE;
+        throw new Exception();
     }
 
     public CategoryViewRead getOne(Long id) {
